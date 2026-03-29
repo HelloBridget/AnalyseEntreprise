@@ -75,10 +75,9 @@
 
     .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 28px; }
     @media(max-width:720px){ .metrics-row{ grid-template-columns: repeat(2,1fr); } }
-    .metric-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 18px; border-top: 3px solid var(--purple); display: flex; flex-direction: column; gap: 4px; }
-    .metric-icon  { font-size: 1.1rem; margin-bottom: 2px; }
-    .metric-label { font-size: 10px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; }
-    .metric-num   { font-family: var(--serif); font-size: 1.9rem; line-height: 1.1; font-weight: 400; margin: 2px 0; word-break: break-word; }
+    .metric-card { background: var(--surface); border-radius: var(--r); padding: 18px 20px; border-top: 2px solid var(--purple); }
+    .metric-label { font-size: 10px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+    .metric-num   { font-family: var(--serif); font-size: 2.2rem; line-height: 1; color: var(--text); margin-bottom: 4px; }
     .metric-sub   { font-size: 11px; color: var(--text-2); line-height: 1.4; }
 
     .results-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
@@ -451,8 +450,7 @@ function renderSynthese(txt){
   const mWrap=$('res-metrics');
   if(metrics.length>0){
     mWrap.style.display='grid';
-    const palette=[{c:'#5046e4',ico:'📊'},{c:'#0d9373',ico:'👥'},{c:'#b45309',ico:'📈'},{c:'#1d4ed8',ico:'💰'}];
-    mWrap.innerHTML=metrics.map((m,i)=>{const p=palette[i%4];return `<div class="metric-card" style="border-top-color:${p.c}"><div class="metric-icon">${p.ico}</div><div class="metric-label">${m.label}</div><div class="metric-num" style="color:${p.c}">${m.num}</div><div class="metric-sub">${m.ctx}</div></div>`;}).join('');
+    mWrap.innerHTML=metrics.map(m=>`<div class="metric-card"><div class="metric-label">${m.label}</div><div class="metric-num">${m.num}</div><div class="metric-sub">${m.ctx}</div></div>`).join('');
   }
   const sections=[], regex=/\*\*(\d+\.\s*.+?)\*\*([\s\S]*?)(?=\*\*\d+\.|$)/g;
   let match;
