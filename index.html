@@ -358,22 +358,13 @@ async function callAPI(apiKey, model, system, messages, maxTokens, tools){
 
 async function runResearchAgent(apiKey, model, company){
   setAgent0('running', `Recherche en cours sur <strong>${company}</strong>…`);
-  const tools = [{ type:'web_search_20250305', name:'web_search' }];
-  const system = `Tu es un agent de veille stratégique. Fais UNE recherche web ciblée sur l'entreprise demandée, puis synthétise en bullet points courts.`;
-  const userPrompt = `Recherche les infos récentes sur "${company}" : chiffres clés, vision du dirigeant, stratégie 2025-2026, actualités. Synthétise en bullet points (max 15 mots par point).`;
+  const system = `Tu es un expert en veille stratégique. Tu as une connaissance approfondie des entreprises, startups et grands groupes. Réponds avec précision et concision.`;
+  const userPrompt = `Donne-moi un brief factuel sur "${company}" avec :\n- Chiffres clés (CA, effectifs, valorisation, croissance)\n- Nom et vision du PDG/CEO (citations si possible)\n- Axes stratégiques annoncés (2024-2026)\n- Actualités marquantes récentes\n- Positionnement marché et concurrents principaux\nFormat : bullet points, max 15 mots par point. Sois précis et factuel.`;
 
-  try {
-    const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 600, tools);
-    const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-    setAgent0('done', `✓ Recherche terminée`);
-    return textBlocks;
-  } catch(e) {
-    // Fallback sans web search si erreur de tokens
-    const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 500);
-    const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-    setAgent0('done', `✓ Analyse depuis les connaissances`);
-    return textBlocks;
-  }
+  const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 500);
+  const text = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+  setAgent0('done', `✓ Contexte collecté`);
+  return text;
 }
 
 async function callAgent(apiKey, model, system, user, agentN){
