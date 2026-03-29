@@ -13,6 +13,7 @@
       --teal: #0d9373; --teal-bg: #edfaf5;
       --amber: #b45309; --amber-bg: #fef3e2;
       --red: #b91c1c; --red-bg: #fef2f2;
+      --blue: #1d4ed8; --blue-bg: #eff6ff;
       --text: #111110; --text-2: #6b6b68; --text-3: #9b9b97;
       --font: 'Inter', system-ui, sans-serif;
       --serif: 'Instrument Serif', Georgia, serif;
@@ -44,10 +45,17 @@
     .error-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: 8px; padding: 11px 14px; color: var(--red); font-size: .85rem; margin-top: 12px; }
 
     /* LOADING */
-    #section-loading { max-width: 660px; margin: 0 auto; }
+    #section-loading { max-width: 760px; margin: 0 auto; }
     .loading-title { text-align: center; margin-bottom: 24px; }
     .loading-title h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--text); }
     .loading-title p { color: var(--text-2); margin-top: 4px; font-size: .88rem; }
+
+    /* Agent 0 — recherche */
+    .agent0-wrap { background: var(--blue-bg); border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; }
+    .agent0-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .agent0-status { font-size: 13px; color: var(--text-2); }
+    .agent0-status strong { color: var(--text); font-weight: 500; }
+
     .agents-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
     @media(max-width:580px){ .agents-grid{ grid-template-columns:repeat(2,1fr); } }
     .agent-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px 12px; text-align: center; transition: border-color .25s; }
@@ -97,7 +105,7 @@
     .synth-block-body  { font-size: 13px; color: var(--text-2); line-height: 1.75; }
     .synth-block-body strong { color: var(--text); font-weight: 500; }
 
-    /* SWOT — 3 colonnes par quadrant */
+    /* SWOT */
     .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .sq { border-radius: 8px; padding: 18px; }
     .sq.f { background: var(--teal-bg);   border: 1px solid #a7f3d0; }
@@ -134,7 +142,7 @@
     .rl-num { font-size: .8rem; font-weight: 600; min-width: 28px; text-align: right; }
     .rl-just { font-size: .72rem; color: var(--text-3); margin-top: 2px; }
 
-    /* RECOMMANDATIONS — 3 items, plus détaillés */
+    /* RECOMMANDATIONS */
     .reco-list { display: flex; flex-direction: column; gap: 10px; }
     .reco-item { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
     .reco-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--purple-bg); color: var(--purple); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
@@ -149,8 +157,8 @@
     .bcat { background: var(--surface); color: var(--text-2); border: 1px solid var(--border); }
 
     /* SOURCES */
-    .sources-list { display: flex; flex-direction: column; gap: 8px; }
-    .source-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .sources-list { display: flex; flex-direction: column; gap: 0; }
+    .source-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
     .source-item:last-child { border-bottom: none; }
     .source-num { font-size: 11px; font-weight: 600; color: var(--purple-mid); min-width: 20px; margin-top: 2px; }
     .source-content { flex: 1; }
@@ -182,6 +190,7 @@
     </div>
     <p>Analyse multi-agents propulsée par Claude AI</p>
     <div class="agents-pill">
+      <span>🔍 Agent Recherche</span>
       <span>📋 Agent Synthèse</span>
       <span>⚖️ Agent SWOT</span>
       <span>📡 Agent Radar DATA/IA</span>
@@ -215,8 +224,18 @@
 <div id="section-loading" class="hidden">
   <div class="loading-title">
     <h2>Analyse en cours…</h2>
-    <p>4 agents travaillent en parallèle sur <strong id="lbl-company"></strong></p>
+    <p>Recherche documentaire puis analyse multi-agents sur <strong id="lbl-company"></strong></p>
   </div>
+
+  <!-- Agent 0 — recherche web -->
+  <div class="agent0-wrap">
+    <div class="agent0-label">
+      <span class="spinner" id="a0-spinner" style="display:none"></span>
+      🔍 Agent Recherche — collecte de sources
+    </div>
+    <div class="agent0-status" id="a0-status">En attente de lancement…</div>
+  </div>
+
   <div class="agents-grid">
     <div class="agent-card" id="ac-1"><div class="agent-emoji">📋</div><div class="agent-label">Synthèse</div><div><span class="agent-badge b-pending" id="ab-1">En attente</span></div></div>
     <div class="agent-card" id="ac-2"><div class="agent-emoji">⚖️</div><div class="agent-label">SWOT</div><div><span class="agent-badge b-pending" id="ab-2">En attente</span></div></div>
@@ -240,7 +259,7 @@
     <div class="results-grid">
 
       <div class="rcard">
-        <div class="rcard-head"><span class="rcard-ico">📋</span><span class="rcard-num">01&nbsp;</span><span class="rcard-label">Synthèse &amp; Actualité</span></div>
+        <div class="rcard-head"><span class="rcard-ico">📋</span><span class="rcard-num">01&nbsp;</span><span class="rcard-label">Synthèse &amp; Vision stratégique</span></div>
         <div class="rcard-body"><div class="synth-blocks" id="res-synthese"></div></div>
       </div>
 
@@ -271,7 +290,7 @@
       </div>
 
       <div class="rcard">
-        <div class="rcard-head"><span class="rcard-ico">🔗</span><span class="rcard-num">05&nbsp;</span><span class="rcard-label">Sources utilisées</span></div>
+        <div class="rcard-head"><span class="rcard-ico">🔗</span><span class="rcard-num">05&nbsp;</span><span class="rcard-label">Sources consultées</span></div>
         <div class="rcard-body"><div class="sources-list" id="res-sources"></div></div>
       </div>
 
@@ -301,29 +320,132 @@ function setAgent(n, state){
   badge.className=`agent-badge ${cfg.cls}`; badge.innerHTML=cfg.lbl;
 }
 
+function setAgent0(state, msg){
+  const spinner = $('a0-spinner');
+  const status  = $('a0-status');
+  const wrap    = spinner.closest('.agent0-wrap');
+  if(state==='running'){
+    spinner.style.display='inline-block';
+    wrap.style.borderColor='#93c5fd';
+    status.innerHTML=msg;
+  } else if(state==='done'){
+    spinner.style.display='none';
+    wrap.style.borderColor='#6ee7b7';
+    wrap.style.background='#f0fdf4';
+    status.innerHTML=msg;
+  } else if(state==='error'){
+    spinner.style.display='none';
+    wrap.style.borderColor='#fca5a5';
+    status.innerHTML=`<span style="color:var(--red)">${msg}</span>`;
+  }
+}
+
 function parseJSON(txt){ const m=txt.match(/\{[\s\S]*\}/); return JSON.parse(m?m[0]:txt.trim()); }
 function scoreColor(s){ return s>=4?'#0d9373':s>=3?'#5046e4':s>=2?'#b45309':'#b91c1c'; }
 
+// ── Appel API générique ──
+async function callAPI(apiKey, model, system, messages, maxTokens, tools){
+  const body = { model, system, messages, max_tokens: maxTokens };
+  if(tools) body.tools = tools;
+  const res = await fetch(API_URL, {
+    method:'POST',
+    headers:{
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if(!res.ok){ let e=`HTTP ${res.status}`; try{const j=await res.json();e=j.error?.message||e;}catch(_){} throw new Error(e); }
+  return res.json();
+}
+
+// ── Agent 0 : recherche web avec l'outil web_search ──
+async function runResearchAgent(apiKey, model, company){
+  setAgent0('running', `Recherche en cours sur <strong>${company}</strong> : rapports annuels, prises de parole dirigeants, stratégie…`);
+
+  const tools = [{
+    type: 'web_search_20250305',
+    name: 'web_search'
+  }];
+
+  const system = `Tu es un agent de veille stratégique. Tu effectues des recherches web approfondies sur une entreprise pour collecter des informations factuelles, récentes et fiables. Tu cherches particulièrement : les prises de parole des dirigeants, les plans stratégiques annoncés, les rapports annuels, les résultats financiers, les actualités récentes. Tu synthétises tout dans un rapport structuré en français.`;
+
+  const userPrompt = `Effectue une recherche approfondie sur l'entreprise "${company}".
+
+Cherche et collecte :
+1. **Chiffres clés récents** (CA, effectifs, résultats financiers)
+2. **Vision et ambitions du dirigeant** — interviews, prises de parole récentes, lettres aux actionnaires, conférences
+3. **Plan stratégique annoncé** — axes prioritaires, objectifs 2025-2030, transformations en cours
+4. **Actualités récentes 2024-2025** — acquisitions, partenariats, restructurations, lancements produits
+5. **Sources trouvées** — liste les URLs réelles avec titre et date
+
+Utilise l'outil web_search avec des requêtes variées :
+- "${company} stratégie 2025 2026"
+- "${company} PDG CEO interview vision"
+- "${company} résultats annuels rapport"
+- "${company} plan transformation"
+
+Synthétise tout ce que tu trouves en un rapport factuel et sourcé.`;
+
+  let messages = [{role:'user', content: userPrompt}];
+  let iterations = 0;
+  const maxIter = 8;
+
+  while(iterations++ < maxIter){
+    const data = await callAPI(apiKey, model, system, messages, 4000, tools);
+
+    // Collecter tous les blocs texte
+    const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    // Collecter les appels d'outil
+    const toolUseBlocks = (data.content||[]).filter(b=>b.type==='tool_use');
+    // Collecter les résultats d'outil
+    const toolResultBlocks = (data.content||[]).filter(b=>b.type==='tool_result');
+
+    if(data.stop_reason==='end_turn'){
+      setAgent0('done', `✓ Recherche terminée — ${toolUseBlocks.length + toolResultBlocks.length > 0 ? 'sources web collectées' : 'analyse depuis les connaissances'}`);
+      return { report: textBlocks, rawContent: data.content };
+    }
+
+    if(data.stop_reason==='tool_use'){
+      // Continuer la conversation avec les résultats des outils
+      messages = [...messages, {role:'assistant', content: data.content}];
+      // Construire les résultats d'outils pour la prochaine itération
+      const toolResults = toolUseBlocks.map(tu => ({
+        type: 'tool_result',
+        tool_use_id: tu.id,
+        content: tu.input ? `Recherche effectuée pour: ${JSON.stringify(tu.input)}` : 'Résultat disponible'
+      }));
+      if(toolResults.length > 0){
+        messages.push({role:'user', content: toolResults});
+      }
+      setAgent0('running', `Recherche en cours… (${iterations} requêtes effectuées)`);
+      continue;
+    }
+
+    if(textBlocks){
+      setAgent0('done', '✓ Recherche terminée');
+      return { report: textBlocks, rawContent: data.content };
+    }
+
+    break;
+  }
+
+  setAgent0('done', '✓ Collecte terminée');
+  return { report: `Analyse de ${company} basée sur les connaissances disponibles.`, rawContent: [] };
+}
+
+// ── Agent d'analyse (utilise le rapport de recherche) ──
 async function callAgent(apiKey, model, system, user, agentN){
   setAgent(agentN,'running');
   try{
     let messages=[{role:'user',content:user}], maxCont=6;
     while(maxCont-->0){
-      const res=await fetch(API_URL,{
-        method:'POST',
-        headers:{
-          'x-api-key':apiKey,
-          'anthropic-version':'2023-06-01',
-          'anthropic-dangerous-direct-browser-access':'true',
-          'content-type':'application/json'
-        },
-        body:JSON.stringify({model,system,messages,max_tokens:agentN===1?2000:1400})
-      });
-      if(!res.ok){let e=`HTTP ${res.status}`;try{const j=await res.json();e=j.error?.message||e;}catch(_){}throw new Error(e);}
-      const data=await res.json();
+      const data = await callAPI(apiKey, model, system, messages, 2000);
       const txt=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
       if(data.stop_reason==='end_turn'){setAgent(agentN,'done');return txt;}
-      if(data.stop_reason==='pause_turn'){messages=[{role:'user',content:user},{role:'assistant',content:data.content}];continue;}
+      if(data.stop_reason==='pause_turn'){messages=[{role:'user',content:messages[0].content},{role:'assistant',content:data.content}];continue;}
       if(txt){setAgent(agentN,'done');return txt;}
       throw new Error(`Stop inattendu: ${data.stop_reason}`);
     }
@@ -331,29 +453,52 @@ async function callAgent(apiKey, model, system, user, agentN){
   }catch(err){setAgent(agentN,'error');throw err;}
 }
 
-function prompts(company){
+function prompts(company, researchReport){
+  const ctx = researchReport
+    ? `\n\n=== DONNÉES DE RECHERCHE COLLECTÉES ===\n${researchReport}\n=== FIN DES DONNÉES ===\n\nBase-toi en priorité sur ces données réelles pour ton analyse.`
+    : '';
+
   return {
     synthese:{
-      system:`Tu es un analyste stratégique senior. Rédige des synthèses précises et factuelles en français.`,
-      user:`Synthèse complète de "${company}".\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date création, siège\n**2. CHIFFRES CLÉS** — Format EXACT pour chaque ligne : "Libellé : CHIFFRE unité (contexte court)". Exemple : "Chiffre d'affaires : 2,3 Mds€ (exercice 2024)". Donne exactement 4 chiffres clés.\n**3. MODÈLE ÉCONOMIQUE** — Sources revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position marché, concurrents\n**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents\n\n450 mots maximum.`
+      system:`Tu es un analyste stratégique senior. Rédige des synthèses précises et factuelles en français. Tu disposes de données de recherche récentes.`,
+      user:`Synthèse complète de "${company}".${ctx}\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date création, siège\n**2. CHIFFRES CLÉS** — Format EXACT : "Libellé : CHIFFRE unité (contexte)". 4 chiffres.\n**3. MODÈLE ÉCONOMIQUE** — Sources revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position marché, concurrents\n**5. VISION STRATÉGIQUE & OÙ VA L'ENTREPRISE** — Plans annoncés, ambitions du dirigeant, prises de parole récentes, objectifs 2025-2030. C'est la section la plus importante : sois précis et cite les déclarations réelles si disponibles.\n**6. ACTUALITÉ 2024-2025** — Événements récents marquants\n\n500 mots maximum.`
     },
     swot:{
       system:`Tu es consultant expert en stratégie. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`SWOT détaillé et précis de "${company}". JSON uniquement :\n{\n  "forces":["item1","item2","item3","item4","item5","item6"],\n  "faiblesses":["item1","item2","item3","item4","item5","item6"],\n  "opportunites":["item1","item2","item3","item4","item5","item6"],\n  "menaces":["item1","item2","item3","item4","item5","item6"]\n}\nEXACTEMENT 6 éléments par liste. Chaque élément doit être PRÉCIS et SPÉCIFIQUE à l'entreprise, pas générique. Max 20 mots par élément.`
+      user:`SWOT détaillé de "${company}".${ctx}\n\nJSON uniquement :\n{\n  "forces":["item1","item2","item3","item4","item5","item6"],\n  "faiblesses":["item1","item2","item3","item4","item5","item6"],\n  "opportunites":["item1","item2","item3","item4","item5","item6"],\n  "menaces":["item1","item2","item3","item4","item5","item6"]\n}\nEXACTEMENT 6 éléments par liste. Précis et spécifique. Max 20 mots par élément.`
     },
     radar:{
       system:`Tu es expert en transformation digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`Maturité DATA/IA de "${company}". JSON uniquement :\n{"criteres":[{"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"15 mots max"},{"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"15 mots max"},{"id":3,"nom":"Ressources et Compétences","score":X,"justification":"15 mots max"},{"id":4,"nom":"Infrastructure digitale","score":X,"justification":"15 mots max"},{"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"15 mots max"},{"id":6,"nom":"Infrastructure technologique","score":X,"justification":"15 mots max"},{"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"15 mots max"}]}\nX = entier 1-5.`
+      user:`Maturité DATA/IA de "${company}".${ctx}\n\nJSON uniquement :\n{"criteres":[{"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"15 mots max"},{"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"15 mots max"},{"id":3,"nom":"Ressources et Compétences","score":X,"justification":"15 mots max"},{"id":4,"nom":"Infrastructure digitale","score":X,"justification":"15 mots max"},{"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"15 mots max"},{"id":6,"nom":"Infrastructure technologique","score":X,"justification":"15 mots max"},{"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"15 mots max"}]}\nX = entier 1-5.`
     },
     recos:{
       system:`Tu es consultant senior en stratégie digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`3 recommandations stratégiques PRIORITAIRES et DÉTAILLÉES pour "${company}". JSON uniquement :\n{\n  "recommandations":[\n    {\n      "priorite":1,\n      "titre":"max 8 mots",\n      "description":"Description détaillée et actionnable, 40-50 mots, avec contexte et impact attendu",\n      "impact":"court",\n      "categorie":"strategie"\n    }\n  ]\n}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3 recommandations.`
-    },
-    sources:{
-      system:`Tu es un assistant de recherche documentaire. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`Liste les sources web réelles et vérifiables que tu utiliserais pour analyser "${company}". Sites officiels, articles de presse, rapports, bases de données.\n\nJSON uniquement :\n{\n  "sources":[\n    {\n      "titre":"Titre de la source",\n      "url":"https://url-reelle.com/page",\n      "description":"Ce qu'on y trouve en 10 mots max"\n    }\n  ]\n}\nDonne 6 sources RÉELLES avec URLs valides : site officiel, Wikipedia, LinkedIn, articles de presse récents, rapports sectoriels. Vérifie que les URLs existent vraiment.`
+      user:`3 recommandations stratégiques PRIORITAIRES pour "${company}".${ctx}\n\nJSON uniquement :\n{\n  "recommandations":[\n    {\n      "priorite":1,\n      "titre":"max 8 mots",\n      "description":"Description détaillée et actionnable, 40-50 mots, avec contexte et impact attendu. Tiens compte de la vision stratégique annoncée par le dirigeant.",\n      "impact":"court",\n      "categorie":"strategie"\n    }\n  ]\n}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3.`
     }
   };
+}
+
+// ── Extraction sources depuis le rapport de recherche ──
+function extractSources(report){
+  if(!report) return [];
+  const sources = [];
+  // Cherche des URLs dans le texte
+  const urlRegex = /https?:\/\/[^\s\)\]\,\"\']+/g;
+  const titleRegex = /(?:\*\*|##?\s*)([^*\n]+?)(?:\*\*|\n)/g;
+  const urls = [...new Set(report.match(urlRegex)||[])].slice(0,8);
+
+  urls.forEach((url, i) => {
+    // Essaie de trouver un titre associé à cette URL dans le contexte
+    const urlIdx = report.indexOf(url);
+    const before = report.substring(Math.max(0, urlIdx-100), urlIdx);
+    const titleMatch = before.match(/(?:\*\*|"|\[)([^*"\[\]\n]{5,60})(?:\*\*|"|\])\s*$/);
+    const title = titleMatch ? titleMatch[1] : `Source ${i+1}`;
+    // Cherche une description dans les 150 chars après l'URL
+    const after = report.substring(urlIdx + url.length, urlIdx + url.length + 150);
+    const desc = after.replace(/^[\s\-–:]+/, '').split('\n')[0].substring(0, 80);
+    sources.push({ titre: title, url, description: desc || '' });
+  });
+  return sources;
 }
 
 function parseMetrics(txt){
@@ -468,17 +613,16 @@ function renderRecos(d){
   }).join('');
 }
 
-function renderSources(d){
-  const sources=d.sources||[];
-  if(sources.length===0){
-    $('res-sources').innerHTML=`<p style="color:var(--text-3);font-size:13px">Aucune source disponible.</p>`;
+function renderSources(sources){
+  if(!sources||sources.length===0){
+    $('res-sources').innerHTML=`<p style="color:var(--text-3);font-size:13px;padding:8px 0">Aucune source web collectée pour cette analyse.</p>`;
     return;
   }
   $('res-sources').innerHTML=sources.map((s,i)=>`
     <div class="source-item">
       <div class="source-num">${i+1}</div>
       <div class="source-content">
-        <div class="source-title">${s.titre}</div>
+        <div class="source-title">${s.titre||'Source'}</div>
         <a class="source-url" href="${s.url}" target="_blank" rel="noopener">${s.url}</a>
         ${s.description?`<div class="source-desc">${s.description}</div>`:''}
       </div>
@@ -491,21 +635,36 @@ async function startAnalysis(){
   if(!company){errBox.textContent='Veuillez saisir le nom d\'une entreprise.';errBox.classList.remove('hidden');return;}
   if(!apiKey){errBox.textContent='Veuillez saisir votre clé API Anthropic.';errBox.classList.remove('hidden');return;}
   try{localStorage.setItem('aek',apiKey);}catch(_){}
+
   $('section-form').classList.add('hidden');
   $('section-loading').classList.remove('hidden');
   $('section-results').classList.add('hidden');
   $('res-metrics').style.display='none';
   $('lbl-company').textContent=company;
   [1,2,3,4].forEach(i=>setAgent(i,'pending'));
-  const p=prompts(company);
+
+  // ── ÉTAPE 1 : Agent 0 recherche web ──
+  let researchReport = '';
+  let researchSources = [];
   try{
-    const [r1,r2,r3,r4,r5]=await Promise.allSettled([
-      callAgent(apiKey,model,p.synthese.system,p.synthese.user,1),
-      callAgent(apiKey,model,p.swot.system,p.swot.user,2),
-      callAgent(apiKey,model,p.radar.system,p.radar.user,3),
-      callAgent(apiKey,model,p.recos.system,p.recos.user,4),
-      callAgent(apiKey,model,p.sources.system,p.sources.user,4) // agent 4 réutilisé visuellement
+    const research = await runResearchAgent(apiKey, model, company);
+    researchReport = research.report;
+    researchSources = extractSources(researchReport);
+  }catch(e){
+    setAgent0('error', `Recherche échouée : ${e.message} — analyse depuis les connaissances`);
+    researchReport = '';
+  }
+
+  // ── ÉTAPE 2 : 4 agents en parallèle avec le rapport de recherche ──
+  const p = prompts(company, researchReport);
+  try{
+    const [r1,r2,r3,r4] = await Promise.allSettled([
+      callAgent(apiKey, model, p.synthese.system, p.synthese.user, 1),
+      callAgent(apiKey, model, p.swot.system,     p.swot.user,     2),
+      callAgent(apiKey, model, p.radar.system,    p.radar.user,    3),
+      callAgent(apiKey, model, p.recos.system,    p.recos.user,    4)
     ]);
+
     $('section-loading').classList.add('hidden');
     $('section-results').classList.remove('hidden');
     $('res-company').textContent=company;
@@ -523,8 +682,7 @@ async function startAnalysis(){
     if(r4.status==='fulfilled'){try{renderRecos(parseJSON(r4.value));}catch(e){$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Recos</p>`;}}
     else{$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ ${r4.reason?.message}</p>`;}
 
-    if(r5.status==='fulfilled'){try{renderSources(parseJSON(r5.value));}catch(e){$('res-sources').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Sources</p>`;}}
-    else{$('res-sources').innerHTML=`<p style="color:var(--red)">⚠ ${r5.reason?.message}</p>`;}
+    renderSources(researchSources);
 
   }catch(globalErr){
     $('section-loading').classList.add('hidden');
