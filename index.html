@@ -7,87 +7,40 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --bg:        #FAFAF8;
-      --card:      #FFFFFF;
-      --card2:     #F5F4F0;
-      --border:    rgba(0,0,0,0.08);
-      --purple:    #534AB7;
-      --purpleL:   #7F77DD;
-      --purpleXL:  #EEEDFE;
-      --blue:      #2563eb;
-      --green:     #0F6E56;
-      --greenL:    #E1F5EE;
-      --greenM:    #1D9E75;
-      --orange:    #854F0B;
-      --orangeL:   #FAEEDA;
-      --red:       #A32D2D;
-      --redL:      #FCEBEB;
-      --text:      #1C1C1A;
-      --muted:     #6B6A65;
-      --r:         12px;
-      --font-body:    'DM Sans', system-ui, sans-serif;
+      --bg: #FAFAF8; --card: #FFFFFF; --card2: #F5F4F0; --border: rgba(0,0,0,0.08);
+      --purple: #534AB7; --purpleL: #7F77DD; --purpleXL: #EEEDFE;
+      --green: #0F6E56; --greenL: #E1F5EE; --greenM: #1D9E75;
+      --orange: #854F0B; --orangeL: #FAEEDA;
+      --red: #A32D2D; --redL: #FCEBEB;
+      --text: #1C1C1A; --muted: #6B6A65; --r: 12px;
+      --font-body: 'DM Sans', system-ui, sans-serif;
       --font-display: 'DM Serif Display', serif;
     }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
-      min-height: 100vh;
-      padding: 28px 20px;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); min-height: 100vh; padding: 28px 20px; -webkit-font-smoothing: antialiased; }
 
     /* HEADER */
     .app-header { text-align: center; margin-bottom: 36px; }
     .logo { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-    .logo-icon {
-      width: 48px; height: 48px; background: var(--purpleXL);
-      border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
-    }
+    .logo-icon { width: 48px; height: 48px; background: var(--purpleXL); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
     .logo h1 { font-family: var(--font-display); font-size: 1.9rem; font-weight: 400; color: var(--purple); }
     .app-header p { color: var(--muted); font-size: 0.92rem; }
     .agents-pill { display: inline-flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; justify-content: center; }
-    .agents-pill span {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 100px; padding: 3px 12px; font-size: 0.75rem; color: var(--muted);
-    }
+    .agents-pill span { background: var(--card); border: 1px solid var(--border); border-radius: 100px; padding: 3px 12px; font-size: 0.75rem; color: var(--muted); }
 
     /* FORM */
-    .form-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--r); padding: 28px; max-width: 680px; margin: 0 auto;
-    }
+    .form-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 28px; max-width: 680px; margin: 0 auto; }
     .form-group { margin-bottom: 14px; }
-    .form-group label {
-      display: block; font-size: 0.78rem; font-weight: 500;
-      color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
-    }
-    .form-group input, .form-group select {
-      width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
-      color: var(--text); padding: 11px 14px; font-size: 0.95rem;
-      font-family: var(--font-body); outline: none; transition: border-color .2s;
-    }
+    .form-group label { display: block; font-size: 0.78rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 11px 14px; font-size: 0.95rem; font-family: var(--font-body); outline: none; transition: border-color .2s; }
     .form-group input:focus, .form-group select:focus { border-color: var(--purple); }
     .form-group input::placeholder { color: #9B9A94; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media(max-width:600px){ .form-row{ grid-template-columns:1fr; } }
-
-    .btn-analyze {
-      width: 100%; padding: 13px; margin-top: 6px;
-      background: var(--purple); color: #fff; border: none; border-radius: 8px;
-      font-size: 1rem; font-weight: 500; font-family: var(--font-body);
-      cursor: pointer; transition: opacity .2s, transform .1s;
-    }
+    .btn-analyze { width: 100%; padding: 13px; margin-top: 6px; background: var(--purple); color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; font-family: var(--font-body); cursor: pointer; transition: opacity .2s, transform .1s; }
     .btn-analyze:hover { opacity: .88; transform: translateY(-1px); }
     .btn-analyze:disabled { opacity: .45; cursor: not-allowed; transform: none; }
-
-    .error-box {
-      background: var(--redL); border: 1px solid rgba(239,68,68,.35);
-      border-radius: 8px; padding: 12px 16px; color: var(--red); font-size: .88rem; margin-top: 12px;
-    }
+    .error-box { background: var(--redL); border: 1px solid rgba(239,68,68,.35); border-radius: 8px; padding: 12px 16px; color: var(--red); font-size: .88rem; margin-top: 12px; }
 
     /* LOADING */
     #section-loading { max-width: 680px; margin: 0 auto; }
@@ -96,49 +49,33 @@
     .loading-title p { color: var(--muted); margin-top: 4px; }
     .agents-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
     @media(max-width:600px){ .agents-grid{ grid-template-columns:repeat(2,1fr); } }
-
-    .agent-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: 10px; padding: 16px; text-align: center; transition: border-color .3s, box-shadow .3s;
-    }
+    .agent-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; transition: border-color .3s, box-shadow .3s; }
     .agent-card.running { border-color: var(--purple); box-shadow: 0 0 14px rgba(83,74,183,.2); }
-    .agent-card.done    { border-color: var(--greenM); }
-    .agent-card.error   { border-color: var(--red); }
-    .agent-emoji  { font-size: 1.7rem; margin-bottom: 6px; }
-    .agent-label  { font-size: .78rem; font-weight: 500; color: var(--muted); }
-    .agent-badge  { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: .7rem; font-weight: 500; margin-top: 8px; }
+    .agent-card.done { border-color: var(--greenM); }
+    .agent-card.error { border-color: var(--red); }
+    .agent-emoji { font-size: 1.7rem; margin-bottom: 6px; }
+    .agent-label { font-size: .78rem; font-weight: 500; color: var(--muted); }
+    .agent-badge { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: .7rem; font-weight: 500; margin-top: 8px; }
     .b-pending { background: var(--card2); color: var(--muted); }
     .b-running { background: var(--purpleXL); color: var(--purple); }
-    .b-done    { background: var(--greenL); color: var(--green); }
-    .b-error   { background: var(--redL); color: var(--red); }
-
+    .b-done { background: var(--greenL); color: var(--green); }
+    .b-error { background: var(--redL); color: var(--red); }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner {
-      display: inline-block; width: 14px; height: 14px;
-      border: 2px solid rgba(83,74,183,.3); border-top-color: var(--purple);
-      border-radius: 50%; animation: spin .8s linear infinite;
-      vertical-align: middle; margin-right: 4px;
-    }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(83,74,183,.3); border-top-color: var(--purple); border-radius: 50%; animation: spin .8s linear infinite; vertical-align: middle; margin-right: 4px; }
 
     /* RESULTS */
     .results-wrap { max-width: 1100px; margin: 0 auto; }
-
     .results-head { margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border); }
     .results-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--purple); margin-bottom: 8px; }
     .results-head h2 { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; line-height: 1.1; color: var(--text); }
     .results-head h2 em { font-style: italic; color: var(--purple); }
     .results-head .ts { color: var(--muted); font-size: .82rem; margin-top: 8px; }
-
     .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media(max-width:900px){ .results-grid{ grid-template-columns:1fr; } }
     .full { grid-column: 1 / -1; }
 
-    /* RESULT CARD */
     .rcard { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
-    .rcard-head {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 20px; border-bottom: 1px solid var(--border);
-    }
+    .rcard-head { display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-bottom: 1px solid var(--border); }
     .rcard-head .ico { font-size: 1.1rem; }
     .rcard-head-num { font-family: var(--font-display); font-size: 13px; color: var(--purpleL); font-style: italic; margin-right: 2px; }
     .rcard-head-label { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
@@ -154,10 +91,10 @@
     /* SWOT */
     .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .sq { border-radius: 8px; padding: 16px; border: 1px solid; }
-    .sq.f { background: var(--greenL);   border-color: #9FE1CB; }
-    .sq.w { background: var(--orangeL);  border-color: #FAC775; }
+    .sq.f { background: var(--greenL); border-color: #9FE1CB; }
+    .sq.w { background: var(--orangeL); border-color: #FAC775; }
     .sq.o { background: var(--purpleXL); border-color: #CECBF6; }
-    .sq.t { background: var(--redL);     border-color: #F7C1C1; }
+    .sq.t { background: var(--redL); border-color: #F7C1C1; }
     .sq-title { font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
     .sq.f .sq-title { color: var(--green); }
     .sq.w .sq-title { color: var(--orange); }
@@ -170,9 +107,7 @@
     /* RADAR */
     .radar-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
     #res-radar-svg { width: 100%; max-width: 300px; }
-    .score-box {
-      text-align: center; width: 100%; background: var(--purpleXL); border-radius: 8px; padding: 14px;
-    }
+    .score-box { text-align: center; width: 100%; background: var(--purpleXL); border-radius: 8px; padding: 14px; }
     .score-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--purple); margin-bottom: 4px; }
     .score-val { font-family: var(--font-display); font-size: 2.6rem; color: var(--purple); line-height: 1; }
     .score-max { font-size: .9rem; color: var(--muted); }
@@ -189,46 +124,20 @@
 
     /* RECOMMANDATIONS */
     .reco-list { display: flex; flex-direction: column; gap: 8px; }
-    .reco-item {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 8px; padding: 14px 16px;
-      display: flex; gap: 14px; align-items: flex-start;
-    }
-    .reco-num {
-      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
-      background: var(--purpleXL); color: var(--purple);
-      font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center;
-    }
+    .reco-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: flex; gap: 14px; align-items: flex-start; }
+    .reco-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--purpleXL); color: var(--purple); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
     .reco-body { flex: 1; }
     .reco-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .reco-desc  { font-size: 12px; color: var(--muted); line-height: 1.6; }
-    .reco-tags  { display: flex; gap: 6px; flex-shrink: 0; flex-direction: column; align-items: flex-end; }
+    .reco-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+    .reco-tags { display: flex; gap: 6px; flex-shrink: 0; flex-direction: column; align-items: flex-end; }
     .tag { padding: 2px 10px; border-radius: 100px; font-size: .68rem; font-weight: 500; }
-    .tag-p { background: var(--purpleXL); color: var(--purple); }
-    .tag-c { background: var(--greenL);   color: var(--green); }
-    .tag-m { background: var(--orangeL);  color: var(--orange); }
-    .tag-l { background: #E6F1FB;         color: #185FA5; }
+    .tag-c { background: var(--greenL); color: var(--green); }
+    .tag-m { background: var(--orangeL); color: var(--orange); }
+    .tag-l { background: #E6F1FB; color: #185FA5; }
 
-    /* Actions */
     .actions { display: flex; gap: 12px; justify-content: center; margin-top: 28px; }
-    .btn-sec {
-      padding: 11px 28px; background: var(--card); border: 1px solid var(--border);
-      color: var(--text); border-radius: 8px; font-size: .88rem;
-      font-family: var(--font-body); cursor: pointer; transition: border-color .2s;
-    }
+    .btn-sec { padding: 11px 28px; background: var(--card); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-size: .88rem; font-family: var(--font-body); cursor: pointer; transition: border-color .2s; }
     .btn-sec:hover { border-color: var(--purple); }
-
-    /* Proxy toggle */
-    .proxy-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
-    .proxy-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: .85rem; color: var(--muted); user-select: none; }
-    .proxy-toggle input { display: none; }
-    .toggle-track { width: 36px; height: 20px; background: var(--border); border-radius: 100px; position: relative; transition: background .2s; flex-shrink: 0; }
-    .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; background: #fff; border-radius: 50%; transition: transform .2s; }
-    .proxy-toggle input:checked + .toggle-track { background: var(--purple); }
-    .proxy-toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(16px); }
-    .proxy-hint { font-size: .78rem; color: var(--muted); }
-    .proxy-hint code { background: var(--card2); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--purple); }
-    .proxy-hint.ok { color: var(--green); }
 
     .hidden { display: none !important; }
 
@@ -274,14 +183,6 @@
         </select>
       </div>
     </div>
-    <div class="proxy-row">
-      <label class="proxy-toggle">
-        <input type="checkbox" id="chk-proxy" onchange="toggleProxy(this)">
-        <span class="toggle-track"><span class="toggle-thumb"></span></span>
-        Utiliser le proxy local (résout l'erreur CORS)
-      </label>
-      <span id="proxy-status" class="proxy-hint">→ Lancez d'abord <code>demarrer_proxy.ps1</code></span>
-    </div>
     <button class="btn-analyze" id="btn-go" onclick="startAnalysis()">🚀 Lancer l'analyse</button>
     <div id="err-box" class="error-box hidden"></div>
   </div>
@@ -310,31 +211,16 @@
       <p class="ts" id="res-ts"></p>
     </div>
     <div class="results-grid">
-
-      <!-- Agent 1 : Synthèse -->
       <div class="rcard full">
-        <div class="rcard-head">
-          <span class="ico">📋</span>
-          <div><span class="rcard-head-num">01 </span><span class="rcard-head-label">Synthèse &amp; Actualité</span></div>
-        </div>
+        <div class="rcard-head"><span class="ico">📋</span><div><span class="rcard-head-num">01 </span><span class="rcard-head-label">Synthèse &amp; Actualité</span></div></div>
         <div class="rcard-body"><div class="synthese-sections" id="res-synthese"></div></div>
       </div>
-
-      <!-- Agent 2 : SWOT -->
       <div class="rcard">
-        <div class="rcard-head">
-          <span class="ico">⚖️</span>
-          <div><span class="rcard-head-num">02 </span><span class="rcard-head-label">Analyse SWOT</span></div>
-        </div>
+        <div class="rcard-head"><span class="ico">⚖️</span><div><span class="rcard-head-num">02 </span><span class="rcard-head-label">Analyse SWOT</span></div></div>
         <div class="rcard-body"><div class="swot-grid" id="res-swot"></div></div>
       </div>
-
-      <!-- Agent 3 : Radar -->
       <div class="rcard">
-        <div class="rcard-head">
-          <span class="ico">📡</span>
-          <div><span class="rcard-head-num">03 </span><span class="rcard-head-label">Radar Maturité DATA/IA</span></div>
-        </div>
+        <div class="rcard-head"><span class="ico">📡</span><div><span class="rcard-head-num">03 </span><span class="rcard-head-label">Radar Maturité DATA/IA</span></div></div>
         <div class="rcard-body">
           <div class="radar-wrap">
             <svg id="res-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
@@ -346,16 +232,10 @@
           </div>
         </div>
       </div>
-
-      <!-- Agent 4 : Recommandations -->
       <div class="rcard full">
-        <div class="rcard-head">
-          <span class="ico">💡</span>
-          <div><span class="rcard-head-num">04 </span><span class="rcard-head-label">Recommandations Stratégiques</span></div>
-        </div>
+        <div class="rcard-head"><span class="ico">💡</span><div><span class="rcard-head-num">04 </span><span class="rcard-head-label">Recommandations Stratégiques</span></div></div>
         <div class="rcard-body"><div class="reco-list" id="res-recos"></div></div>
       </div>
-
     </div>
     <div class="actions">
       <button class="btn-sec" onclick="window.print()">🖨️ Imprimer / PDF</button>
@@ -365,78 +245,71 @@
 </div>
 
 <script>
-const DIRECT_URL = 'https://api.anthropic.com/v1/messages';
-const PROXY_URL  = 'http://localhost:3456/';
-let useProxy = false;
+const API_URL = 'https://api.anthropic.com/v1/messages';
 
-function toggleProxy(chk){
-  useProxy = chk.checked;
-  const hint = $('proxy-status');
-  if(useProxy){
-    fetch(PROXY_URL,{method:'OPTIONS'})
-      .then(()=>{ hint.className='proxy-hint ok'; hint.textContent='✓ Proxy connecté'; })
-      .catch(()=>{ hint.className='proxy-hint'; hint.innerHTML='⚠ Proxy non détecté — lancez <code>demarrer_proxy.ps1</code>'; });
-  } else {
-    hint.className='proxy-hint';
-    hint.innerHTML='→ Lancez d\'abord <code>demarrer_proxy.ps1</code>';
-  }
-}
-function apiUrl(){ return useProxy ? PROXY_URL : DIRECT_URL; }
 function $(id){ return document.getElementById(id); }
 
-function setAgent(n,state){
-  const card=$(`ac-${n}`), badge=$(`ab-${n}`);
-  if(!card||!badge) return;
-  card.className='agent-card'+(state!=='pending'?' '+state:'');
-  const cfg={
-    pending:{cls:'b-pending',lbl:'En attente'},
-    running:{cls:'b-running',lbl:'<span class="spinner"></span>En cours…'},
-    done   :{cls:'b-done',   lbl:'✓ Terminé'},
-    error  :{cls:'b-error',  lbl:'✗ Erreur'}
-  }[state]||{cls:'b-pending',lbl:'En attente'};
-  badge.className=`agent-badge ${cfg.cls}`;
-  badge.innerHTML=cfg.lbl;
+function setAgent(n, state){
+  const card = $(`ac-${n}`), badge = $(`ab-${n}`);
+  if(!card || !badge) return;
+  card.className = 'agent-card' + (state !== 'pending' ? ' ' + state : '');
+  const cfg = {
+    pending: {cls:'b-pending', lbl:'En attente'},
+    running: {cls:'b-running', lbl:'<span class="spinner"></span>En cours…'},
+    done:    {cls:'b-done',    lbl:'✓ Terminé'},
+    error:   {cls:'b-error',   lbl:'✗ Erreur'}
+  }[state] || {cls:'b-pending', lbl:'En attente'};
+  badge.className = `agent-badge ${cfg.cls}`;
+  badge.innerHTML = cfg.lbl;
 }
 
-function parseJSON(txt){ const m=txt.match(/\{[\s\S]*\}/); return JSON.parse(m?m[0]:txt.trim()); }
-function scoreColor(s){ if(s>=4)return'#1D9E75'; if(s>=3)return'#534AB7'; if(s>=2)return'#BA7517'; return'#A32D2D'; }
+function parseJSON(txt){ const m = txt.match(/\{[\s\S]*\}/); return JSON.parse(m ? m[0] : txt.trim()); }
+function scoreColor(s){ if(s>=4) return '#1D9E75'; if(s>=3) return '#534AB7'; if(s>=2) return '#BA7517'; return '#A32D2D'; }
 
-async function callAgent(apiKey,model,system,user,agentN){
-  setAgent(agentN,'running');
-  try{
-    let messages=[{role:'user',content:user}];
-    let maxCont=6;
-    while(maxCont-->0){
-      const res=await fetch(apiUrl(),{
-        method:'POST',
-        headers:{'x-api-key':apiKey,'anthropic-version':'2023-06-01','content-type':'application/json'},
-        body:JSON.stringify({model,system,messages,max_tokens:agentN===1?1800:1200})
+async function callAgent(apiKey, model, system, user, agentN){
+  setAgent(agentN, 'running');
+  try {
+    let messages = [{role:'user', content: user}];
+    let maxCont = 6;
+    while(maxCont-- > 0){
+      const res = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',  // ← résout le CORS
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({ model, system, messages, max_tokens: agentN === 1 ? 1800 : 1200 })
       });
       if(!res.ok){
-        let errMsg=`HTTP ${res.status}`;
-        try{const e=await res.json();errMsg=e.error?.message||errMsg;}catch(_){}
+        let errMsg = `HTTP ${res.status}`;
+        try { const e = await res.json(); errMsg = e.error?.message || errMsg; } catch(_){}
         throw new Error(errMsg);
       }
-      const data=await res.json();
-      const textBlocks=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-      if(data.stop_reason==='end_turn'){ setAgent(agentN,'done'); return textBlocks; }
-      if(data.stop_reason==='pause_turn'){ messages=[{role:'user',content:user},{role:'assistant',content:data.content}]; continue; }
-      if(textBlocks){ setAgent(agentN,'done'); return textBlocks; }
+      const data = await res.json();
+      const textBlocks = (data.content||[]).filter(b => b.type === 'text').map(b => b.text).join('\n');
+      if(data.stop_reason === 'end_turn'){ setAgent(agentN, 'done'); return textBlocks; }
+      if(data.stop_reason === 'pause_turn'){
+        messages = [{role:'user', content: user}, {role:'assistant', content: data.content}];
+        continue;
+      }
+      if(textBlocks){ setAgent(agentN, 'done'); return textBlocks; }
       throw new Error(`Stop reason inattendu : ${data.stop_reason}`);
     }
     throw new Error('Trop de continuations');
-  }catch(err){ setAgent(agentN,'error'); throw err; }
+  } catch(err){ setAgent(agentN, 'error'); throw err; }
 }
 
 function prompts(company){
   return {
     synthese:{
       system:`Tu es un analyste stratégique senior. Tu rédiges des synthèses précises, factuelles et structurées en français.`,
-      user:`Effectue une synthèse complète de l'entreprise "${company}".\n\nStructure ta réponse avec ces sections (utilise **Titre** pour les titres) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité principale, date de création, siège social\n**2. CHIFFRES CLÉS** — Chiffre d'affaires, effectifs, présence géographique\n**3. MODÈLE ÉCONOMIQUE** — Sources de revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position sur le marché, principaux concurrents\n**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents (acquisitions, IA, innovations)\n\nSois factuel et concis. 400-500 mots maximum.`
+      user:`Effectue une synthèse complète de l'entreprise "${company}".\n\nStructure ta réponse avec ces sections (utilise **Titre** pour les titres) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité principale, date de création, siège social\n**2. CHIFFRES CLÉS** — Chiffre d'affaires, effectifs, présence géographique\n**3. MODÈLE ÉCONOMIQUE** — Sources de revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position sur le marché, principaux concurrents\n**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents\n\nSois factuel et concis. 400-500 mots maximum.`
     },
     swot:{
       system:`Tu es un consultant expert en stratégie d'entreprise. Tu RÉPONDS UNIQUEMENT en JSON valide, sans texte supplémentaire.`,
-      user:`Réalise une analyse SWOT de l'entreprise "${company}".\nRéponds UNIQUEMENT avec ce JSON :\n{\n  "forces":["Force 1 max 15 mots","Force 2","Force 3","Force 4"],\n  "faiblesses":["Faiblesse 1","Faiblesse 2","Faiblesse 3","Faiblesse 4"],\n  "opportunites":["Opportunité 1","Opportunité 2","Opportunité 3","Opportunité 4"],\n  "menaces":["Menace 1","Menace 2","Menace 3","Menace 4"]\n}\nExactement 4 éléments par liste.`
+      user:`Réalise une analyse SWOT de l'entreprise "${company}".\nRéponds UNIQUEMENT avec ce JSON :\n{\n  "forces":["Force 1","Force 2","Force 3","Force 4"],\n  "faiblesses":["Faiblesse 1","Faiblesse 2","Faiblesse 3","Faiblesse 4"],\n  "opportunites":["Opportunité 1","Opportunité 2","Opportunité 3","Opportunité 4"],\n  "menaces":["Menace 1","Menace 2","Menace 3","Menace 4"]\n}\nExactement 4 éléments par liste, max 15 mots chacun.`
     },
     radar:{
       system:`Tu es un expert en transformation digitale et IA. Tu RÉPONDS UNIQUEMENT en JSON valide.`,
@@ -444,74 +317,73 @@ function prompts(company){
     },
     recos:{
       system:`Tu es un consultant senior en stratégie digitale et IA. Tu RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`Formule 5 recommandations stratégiques pour "${company}".\nRéponds UNIQUEMENT avec ce JSON :\n{\n  "recommandations":[\n    {"priorite":1,"titre":"Titre court max 8 mots","description":"Action concrète max 25 mots","impact":"court","categorie":"strategie"}\n  ]\n}\n"impact"="court"|"moyen"|"long". "categorie"=strategie|data|ia|organisation|infrastructure. 5 recommandations exactement.`
+      user:`Formule 5 recommandations stratégiques pour "${company}".\nRéponds UNIQUEMENT avec ce JSON :\n{\n  "recommandations":[\n    {"priorite":1,"titre":"Titre court max 8 mots","description":"Action concrète max 25 mots","impact":"court","categorie":"strategie"}\n  ]\n}\n"impact"="court"|"moyen"|"long". 5 recommandations exactement.`
     }
   };
 }
 
 function renderSynthese(txt){
-  const sections=[];
-  const regex=/\*\*(\d+\..+?)\*\*([\s\S]*?)(?=\*\*\d+\.|$)/g;
+  const sections = [];
+  const regex = /\*\*(\d+\..+?)\*\*([\s\S]*?)(?=\*\*\d+\.|$)/g;
   let match;
-  while((match=regex.exec(txt))!==null){ sections.push({title:match[1].trim(),body:match[2].trim()}); }
-  if(sections.length===0){
-    const html=txt.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
-    $('res-synthese').innerHTML=`<div class="synth-block"><div class="synth-block-body">${html}</div></div>`;
+  while((match = regex.exec(txt)) !== null){ sections.push({title: match[1].trim(), body: match[2].trim()}); }
+  if(sections.length === 0){
+    const html = txt.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>');
+    $('res-synthese').innerHTML = `<div class="synth-block"><div class="synth-block-body">${html}</div></div>`;
     return;
   }
-  $('res-synthese').innerHTML=sections.map(s=>{
-    const body=s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .split('\n').filter(l=>l.trim()).map(l=>`<p style="margin-bottom:4px">${l.replace(/^- /,'')}</p>`).join('');
+  $('res-synthese').innerHTML = sections.map(s => {
+    const body = s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .split('\n').filter(l => l.trim()).map(l => `<p style="margin-bottom:4px">${l.replace(/^- /,'')}</p>`).join('');
     return `<div class="synth-block"><div class="synth-block-title">${s.title}</div><div class="synth-block-body">${body}</div></div>`;
   }).join('');
 }
 
 function renderSWOT(d){
-  const quads=[
-    {key:'forces',cls:'f',title:'Forces'},
-    {key:'faiblesses',cls:'w',title:'Faiblesses'},
-    {key:'opportunites',cls:'o',title:'Opportunités'},
-    {key:'menaces',cls:'t',title:'Menaces'}
+  const quads = [
+    {key:'forces', cls:'f', title:'Forces'},
+    {key:'faiblesses', cls:'w', title:'Faiblesses'},
+    {key:'opportunites', cls:'o', title:'Opportunités'},
+    {key:'menaces', cls:'t', title:'Menaces'}
   ];
-  $('res-swot').innerHTML=quads.map(q=>`
+  $('res-swot').innerHTML = quads.map(q => `
     <div class="sq ${q.cls}">
       <div class="sq-title">${q.title}</div>
-      <ul>${(d[q.key]||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
+      <ul>${(d[q.key]||[]).map(i => `<li>${i}</li>`).join('')}</ul>
     </div>`).join('');
 }
 
 function renderRadar(d){
-  const cr=d.criteres||[];
-  const n=cr.length, cx=150, cy=150, r=100;
-  const avg=cr.reduce((s,c)=>s+c.score,0)/n;
-  $('res-score').textContent=avg.toFixed(1);
-  const shortLbls=cr.map(c=>{ const w=c.nom.split(' '); return w.length>2?w.slice(0,2).join(' '):c.nom; });
-  let svg='';
-  for(let lv=1;lv<=5;lv++){
-    const pts=cr.map((_,i)=>{ const a=(i*2*Math.PI/n)-Math.PI/2; return `${cx+(lv/5)*r*Math.cos(a)},${cy+(lv/5)*r*Math.sin(a)}`; }).join(' ');
-    svg+=`<polygon points="${pts}" fill="none" stroke="#CECBF6" stroke-width="${lv===5?1.2:.6}"/>`;
+  const cr = d.criteres || [];
+  const n = cr.length, cx = 150, cy = 150, r = 100;
+  const avg = cr.reduce((s,c) => s + c.score, 0) / n;
+  $('res-score').textContent = avg.toFixed(1);
+  const shortLbls = cr.map(c => { const w = c.nom.split(' '); return w.length > 2 ? w.slice(0,2).join(' ') : c.nom; });
+  let svg = '';
+  for(let lv = 1; lv <= 5; lv++){
+    const pts = cr.map((_,i) => { const a = (i*2*Math.PI/n)-Math.PI/2; return `${cx+(lv/5)*r*Math.cos(a)},${cy+(lv/5)*r*Math.sin(a)}`; }).join(' ');
+    svg += `<polygon points="${pts}" fill="none" stroke="#CECBF6" stroke-width="${lv===5?1.2:.6}"/>`;
   }
-  cr.forEach((_,i)=>{
-    const a=(i*2*Math.PI/n)-Math.PI/2;
-    const x2=cx+r*Math.cos(a), y2=cy+r*Math.sin(a);
-    svg+=`<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#CECBF6" stroke-width=".7"/>`;
-    const lx=cx+(r+18)*Math.cos(a), ly=cy+(r+18)*Math.sin(a);
-    const anch=Math.cos(a)>0.3?'start':Math.cos(a)<-0.3?'end':'middle';
-    svg+=`<text x="${lx}" y="${ly}" text-anchor="${anch}" dominant-baseline="middle" fill="#9B9A94" font-size="7.5" font-family="DM Sans,system-ui,sans-serif">${shortLbls[i]||''}</text>`;
+  cr.forEach((_,i) => {
+    const a = (i*2*Math.PI/n)-Math.PI/2;
+    svg += `<line x1="${cx}" y1="${cy}" x2="${cx+r*Math.cos(a)}" y2="${cy+r*Math.sin(a)}" stroke="#CECBF6" stroke-width=".7"/>`;
+    const lx = cx+(r+18)*Math.cos(a), ly = cy+(r+18)*Math.sin(a);
+    const anch = Math.cos(a)>0.3?'start':Math.cos(a)<-0.3?'end':'middle';
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anch}" dominant-baseline="middle" fill="#9B9A94" font-size="7.5" font-family="DM Sans,system-ui,sans-serif">${shortLbls[i]||''}</text>`;
   });
-  const pts=cr.map((c,i)=>{ const a=(i*2*Math.PI/n)-Math.PI/2; return `${cx+(c.score/5)*r*Math.cos(a)},${cy+(c.score/5)*r*Math.sin(a)}`; }).join(' ');
-  svg+=`<polygon points="${pts}" fill="rgba(127,119,221,0.2)" stroke="#534AB7" stroke-width="2" stroke-linejoin="round"/>`;
-  cr.forEach((c,i)=>{
-    const a=(i*2*Math.PI/n)-Math.PI/2;
-    svg+=`<circle cx="${cx+(c.score/5)*r*Math.cos(a)}" cy="${cy+(c.score/5)*r*Math.sin(a)}" r="5" fill="#1D9E75" stroke="white" stroke-width="2"/>`;
+  const pts = cr.map((c,i) => { const a = (i*2*Math.PI/n)-Math.PI/2; return `${cx+(c.score/5)*r*Math.cos(a)},${cy+(c.score/5)*r*Math.sin(a)}`; }).join(' ');
+  svg += `<polygon points="${pts}" fill="rgba(127,119,221,0.2)" stroke="#534AB7" stroke-width="2" stroke-linejoin="round"/>`;
+  cr.forEach((c,i) => {
+    const a = (i*2*Math.PI/n)-Math.PI/2;
+    svg += `<circle cx="${cx+(c.score/5)*r*Math.cos(a)}" cy="${cy+(c.score/5)*r*Math.sin(a)}" r="5" fill="#1D9E75" stroke="white" stroke-width="2"/>`;
   });
-  svg+=`<circle cx="${cx}" cy="${cy}" r="3" fill="#CECBF6"/>`;
-  $('res-radar-svg').innerHTML=svg;
-  $('res-rl').innerHTML=cr.map(c=>`
+  svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="#CECBF6"/>`;
+  $('res-radar-svg').innerHTML = svg;
+  $('res-rl').innerHTML = cr.map(c => `
     <div class="rl-row">
       <div class="rl-top">
         <span class="rl-name">${c.nom}</span>
-        <div class="dots">${Array.from({length:5},(_,i)=>`<div class="dot${i<c.score?' on':''}"></div>`).join('')}</div>
+        <div class="dots">${Array.from({length:5},(_,i) => `<div class="dot${i<c.score?' on':''}"></div>`).join('')}</div>
         <span class="rl-num" style="color:${scoreColor(c.score)}">${c.score}/5</span>
       </div>
       <div class="rl-just">${c.justification}</div>
@@ -519,17 +391,16 @@ function renderRadar(d){
 }
 
 function renderRecos(d){
-  const recos=d.recommandations||[];
-  const impMap={court:{lbl:'Court terme',cls:'tag-c'},moyen:{lbl:'Moyen terme',cls:'tag-m'},long:{lbl:'Long terme',cls:'tag-l'}};
-  const catIco={strategie:'🎯',data:'📊',ia:'🤖',organisation:'👥',infrastructure:'🏗️'};
-  $('res-recos').innerHTML=recos.map(r=>{
-    const imp=impMap[r.impact]||{lbl:r.impact,cls:'tag-c'};
-    const ico=catIco[r.categorie]||'💡';
+  const recos = d.recommandations || [];
+  const impMap = {court:{lbl:'Court terme',cls:'tag-c'}, moyen:{lbl:'Moyen terme',cls:'tag-m'}, long:{lbl:'Long terme',cls:'tag-l'}};
+  const catIco = {strategie:'🎯', data:'📊', ia:'🤖', organisation:'👥', infrastructure:'🏗️'};
+  $('res-recos').innerHTML = recos.map(r => {
+    const imp = impMap[r.impact] || {lbl:r.impact, cls:'tag-c'};
     return `
       <div class="reco-item">
         <div class="reco-num">${r.priorite}</div>
         <div class="reco-body">
-          <div class="reco-title">${ico} ${r.titre}</div>
+          <div class="reco-title">${catIco[r.categorie]||'💡'} ${r.titre}</div>
           <div class="reco-desc">${r.description}</div>
         </div>
         <div class="reco-tags"><span class="tag ${imp.cls}">${imp.lbl}</span></div>
@@ -538,43 +409,44 @@ function renderRecos(d){
 }
 
 async function startAnalysis(){
-  const company=$('inp-company').value.trim();
-  const apiKey=$('inp-apikey').value.trim();
-  const model=$('inp-model').value;
-  const errBox=$('err-box');
-  errBox.classList.add('hidden'); errBox.textContent='';
-  if(!company){ errBox.textContent='Veuillez saisir le nom d\'une entreprise.'; errBox.classList.remove('hidden'); return; }
-  if(!apiKey){ errBox.textContent='Veuillez saisir votre clé API Anthropic (sk-ant-…).'; errBox.classList.remove('hidden'); return; }
-  try{ localStorage.setItem('aek',apiKey); }catch(_){}
+  const company = $('inp-company').value.trim();
+  const apiKey  = $('inp-apikey').value.trim();
+  const model   = $('inp-model').value;
+  const errBox  = $('err-box');
+  errBox.classList.add('hidden'); errBox.textContent = '';
+  if(!company){ errBox.textContent = 'Veuillez saisir le nom d\'une entreprise.'; errBox.classList.remove('hidden'); return; }
+  if(!apiKey){ errBox.textContent = 'Veuillez saisir votre clé API Anthropic (sk-ant-…).'; errBox.classList.remove('hidden'); return; }
+  try{ localStorage.setItem('aek', apiKey); }catch(_){}
   $('section-form').classList.add('hidden');
   $('section-loading').classList.remove('hidden');
   $('section-results').classList.add('hidden');
-  $('lbl-company').textContent=company;
-  [1,2,3,4].forEach(i=>setAgent(i,'pending'));
-  const p=prompts(company);
+  $('lbl-company').textContent = company;
+  [1,2,3,4].forEach(i => setAgent(i,'pending'));
+  const p = prompts(company);
   try{
-    const [r1,r2,r3,r4]=await Promise.allSettled([
-      callAgent(apiKey,model,p.synthese.system,p.synthese.user,1),
-      callAgent(apiKey,model,p.swot.system,p.swot.user,2),
-      callAgent(apiKey,model,p.radar.system,p.radar.user,3),
-      callAgent(apiKey,model,p.recos.system,p.recos.user,4)
+    const [r1,r2,r3,r4] = await Promise.allSettled([
+      callAgent(apiKey, model, p.synthese.system, p.synthese.user, 1),
+      callAgent(apiKey, model, p.swot.system,     p.swot.user,     2),
+      callAgent(apiKey, model, p.radar.system,    p.radar.user,    3),
+      callAgent(apiKey, model, p.recos.system,    p.recos.user,    4)
     ]);
     $('section-loading').classList.add('hidden');
     $('section-results').classList.remove('hidden');
-    $('res-company').textContent=company;
-    $('res-ts').textContent=`Généré le ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · Modèle : ${model}`;
+    $('res-company').textContent = company;
+    $('res-ts').textContent = `Généré le ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · Modèle : ${model}`;
+
     if(r1.status==='fulfilled'){ renderSynthese(r1.value); }
     else{ $('res-synthese').innerHTML=`<div class="synth-block"><div class="synth-block-body" style="color:var(--red)">⚠ Erreur : ${r1.reason?.message}</div></div>`; }
-    if(r2.status==='fulfilled'){ try{ renderSWOT(parseJSON(r2.value)); }catch(e){ $('res-swot').innerHTML=`<p style="color:var(--red)">⚠ Erreur de parsing</p>`; } }
+    if(r2.status==='fulfilled'){ try{ renderSWOT(parseJSON(r2.value)); }catch(e){ $('res-swot').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing SWOT</p>`; } }
     else{ $('res-swot').innerHTML=`<p style="color:var(--red)">⚠ ${r2.reason?.message}</p>`; }
-    if(r3.status==='fulfilled'){ try{ renderRadar(parseJSON(r3.value)); }catch(e){ $('res-radar-svg').parentElement.innerHTML=`<p style="color:var(--red)">⚠ Erreur de parsing</p>`; } }
+    if(r3.status==='fulfilled'){ try{ renderRadar(parseJSON(r3.value)); }catch(e){ $('res-radar-svg').parentElement.innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Radar</p>`; } }
     else{ $('res-rl').innerHTML=`<p style="color:var(--red)">⚠ ${r3.reason?.message}</p>`; }
-    if(r4.status==='fulfilled'){ try{ renderRecos(parseJSON(r4.value)); }catch(e){ $('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur de parsing</p>`; } }
+    if(r4.status==='fulfilled'){ try{ renderRecos(parseJSON(r4.value)); }catch(e){ $('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Recommandations</p>`; } }
     else{ $('res-recos').innerHTML=`<p style="color:var(--red)">⚠ ${r4.reason?.message}</p>`; }
-  }catch(globalErr){
+  } catch(globalErr){
     $('section-loading').classList.add('hidden');
     $('section-form').classList.remove('hidden');
-    errBox.textContent=`Erreur : ${globalErr.message}`;
+    errBox.textContent = `Erreur : ${globalErr.message}`;
     errBox.classList.remove('hidden');
   }
 }
@@ -584,9 +456,9 @@ function newAnalysis(){
   $('section-form').classList.remove('hidden');
 }
 
-window.addEventListener('load',()=>{
-  try{ const k=localStorage.getItem('aek'); if(k) $('inp-apikey').value=k; }catch(_){}
-  $('inp-company').addEventListener('keydown',e=>{ if(e.key==='Enter') startAnalysis(); });
+window.addEventListener('load', () => {
+  try{ const k = localStorage.getItem('aek'); if(k) $('inp-apikey').value = k; }catch(_){}
+  $('inp-company').addEventListener('keydown', e => { if(e.key==='Enter') startAnalysis(); });
 });
 </script>
 </body>
