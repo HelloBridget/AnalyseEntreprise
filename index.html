@@ -7,207 +7,124 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
     :root {
-      --white:     #ffffff;
-      --bg:        #ffffff;
-      --surface:   #f7f7f5;
-      --border:    #e8e8e5;
-      --border2:   #d0d0cc;
-      --purple:    #5046e4;
-      --purple-bg: #f0efff;
-      --purple-mid:#8b85f0;
-      --teal:      #0d9373;
-      --teal-bg:   #edfaf5;
-      --amber:     #b45309;
-      --amber-bg:  #fef3e2;
-      --red:       #b91c1c;
-      --red-bg:    #fef2f2;
-      --text:      #111110;
-      --text-2:    #6b6b68;
-      --text-3:    #9b9b97;
-      --font:      'Inter', system-ui, sans-serif;
-      --serif:     'Instrument Serif', Georgia, serif;
-      --r:         10px;
+      --bg: #ffffff; --surface: #f7f7f5; --border: #e8e8e5;
+      --purple: #5046e4; --purple-bg: #f0efff; --purple-mid: #8b85f0;
+      --teal: #0d9373; --teal-bg: #edfaf5;
+      --amber: #b45309; --amber-bg: #fef3e2;
+      --red: #b91c1c; --red-bg: #fef2f2;
+      --text: #111110; --text-2: #6b6b68; --text-3: #9b9b97;
+      --font: 'Inter', system-ui, sans-serif;
+      --serif: 'Instrument Serif', Georgia, serif;
+      --r: 10px;
     }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; padding: 40px 20px 80px; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      font-size: 14px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      padding: 40px 20px 80px;
-    }
-
-    /* ── HEADER ── */
+    /* HEADER */
     .app-header { text-align: center; margin-bottom: 40px; }
     .logo { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 8px; }
-    .logo-icon {
-      width: 44px; height: 44px; border-radius: 10px;
-      background: var(--purple-bg); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
-    }
-    .logo h1 {
-      font-family: var(--serif); font-size: 2rem; font-weight: 400;
-      color: var(--text); letter-spacing: -0.01em;
-    }
-    .app-header p { color: var(--text-2); font-size: 0.88rem; font-weight: 300; }
+    .logo-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--purple-bg); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
+    .logo h1 { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--text); }
+    .app-header p { color: var(--text-2); font-size: 0.88rem; }
     .agents-pill { display: inline-flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; justify-content: center; }
-    .agents-pill span {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 100px; padding: 4px 12px; font-size: 0.72rem; color: var(--text-2); font-weight: 400;
-    }
+    .agents-pill span { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-size: 0.72rem; color: var(--text-2); }
 
-    /* ── FORM ── */
-    .form-card {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px; max-width: 660px; margin: 0 auto;
-      box-shadow: 0 1px 4px rgba(0,0,0,.04);
-    }
+    /* FORM */
+    .form-card { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 28px; max-width: 660px; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
     .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block; font-size: 0.72rem; font-weight: 600; color: var(--text-2);
-      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px;
-    }
-    .form-group input, .form-group select {
-      width: 100%; background: var(--surface); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text); padding: 10px 13px; font-size: 0.92rem;
-      font-family: var(--font); outline: none; transition: border-color .15s, box-shadow .15s;
-    }
-    .form-group input:focus, .form-group select:focus {
-      border-color: var(--purple); box-shadow: 0 0 0 3px rgba(80,70,228,.1);
-      background: var(--white);
-    }
+    .form-group label { display: block; font-size: 0.72rem; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px; }
+    .form-group input, .form-group select { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); padding: 10px 13px; font-size: 0.92rem; font-family: var(--font); outline: none; transition: border-color .15s, box-shadow .15s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(80,70,228,.1); background: var(--bg); }
     .form-group input::placeholder { color: var(--text-3); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
     @media(max-width:580px){ .form-row{ grid-template-columns:1fr; } }
-
-    .btn-analyze {
-      width: 100%; padding: 12px; margin-top: 4px;
-      background: var(--purple); color: #fff; border: none; border-radius: 8px;
-      font-size: 0.92rem; font-weight: 500; font-family: var(--font);
-      cursor: pointer; transition: opacity .15s, transform .1s;
-      letter-spacing: 0.01em;
-    }
+    .btn-analyze { width: 100%; padding: 12px; margin-top: 4px; background: var(--purple); color: #fff; border: none; border-radius: 8px; font-size: 0.92rem; font-weight: 500; font-family: var(--font); cursor: pointer; transition: opacity .15s, transform .1s; }
     .btn-analyze:hover { opacity: .88; transform: translateY(-1px); }
     .btn-analyze:disabled { opacity: .4; cursor: not-allowed; transform: none; }
-    .error-box {
-      background: var(--red-bg); border: 1px solid #fecaca; border-radius: 8px;
-      padding: 11px 14px; color: var(--red); font-size: .85rem; margin-top: 12px;
-    }
+    .error-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: 8px; padding: 11px 14px; color: var(--red); font-size: .85rem; margin-top: 12px; }
 
-    /* ── LOADING ── */
+    /* LOADING */
     #section-loading { max-width: 660px; margin: 0 auto; }
     .loading-title { text-align: center; margin-bottom: 24px; }
     .loading-title h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--text); }
     .loading-title p { color: var(--text-2); margin-top: 4px; font-size: .88rem; }
     .agents-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
     @media(max-width:580px){ .agents-grid{ grid-template-columns:repeat(2,1fr); } }
-    .agent-card {
-      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
-      padding: 16px 12px; text-align: center; transition: border-color .25s;
-    }
+    .agent-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px 12px; text-align: center; transition: border-color .25s; }
     .agent-card.running { border-color: var(--purple); }
     .agent-card.done    { border-color: var(--teal); }
     .agent-card.error   { border-color: var(--red); }
-    .agent-emoji  { font-size: 1.5rem; margin-bottom: 6px; }
-    .agent-label  { font-size: .75rem; font-weight: 500; color: var(--text-2); }
-    .agent-badge  { display: inline-block; padding: 2px 9px; border-radius: 100px; font-size: .68rem; font-weight: 500; margin-top: 8px; }
+    .agent-emoji { font-size: 1.5rem; margin-bottom: 6px; }
+    .agent-label { font-size: .75rem; font-weight: 500; color: var(--text-2); }
+    .agent-badge { display: inline-block; padding: 2px 9px; border-radius: 100px; font-size: .68rem; font-weight: 500; margin-top: 8px; }
     .b-pending { background: var(--surface); color: var(--text-3); }
     .b-running { background: var(--purple-bg); color: var(--purple); }
     .b-done    { background: var(--teal-bg); color: var(--teal); }
     .b-error   { background: var(--red-bg); color: var(--red); }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .spinner {
-      display: inline-block; width: 12px; height: 12px;
-      border: 2px solid rgba(80,70,228,.25); border-top-color: var(--purple);
-      border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 4px;
-    }
+    .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(80,70,228,.25); border-top-color: var(--purple); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 4px; }
 
-    /* ── RESULTS SHELL ── */
+    /* RESULTS */
     .results-wrap { max-width: 1080px; margin: 0 auto; }
-
-    /* ── RESULTS HEADER ── */
-    .results-head {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      gap: 20px; flex-wrap: wrap;
-      margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--border);
-    }
-    .rh-left {}
+    .results-head { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
     .rh-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
     .rh-title { font-family: var(--serif); font-size: 2.6rem; font-weight: 400; line-height: 1.05; color: var(--text); }
     .rh-title em { font-style: italic; color: var(--purple); }
     .rh-ts { font-size: .78rem; color: var(--text-3); margin-top: 6px; }
 
-    /* ── METRICS ROW ── */
-    .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 32px; }
+    /* METRICS */
+    .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 28px; }
     @media(max-width:720px){ .metrics-row{ grid-template-columns: repeat(2,1fr); } }
-    .metric-card {
-      background: var(--surface); border-radius: var(--r); padding: 18px 20px;
-      position: relative; overflow: hidden;
-    }
-    .metric-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: var(--purple);
-    }
-    .metric-label { font-size: 11px; font-weight: 500; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
-    .metric-value { font-family: var(--serif); font-size: 1.9rem; color: var(--text); line-height: 1; }
-    .metric-sub   { font-size: 11px; color: var(--text-2); margin-top: 5px; }
+    .metric-card { background: var(--surface); border-radius: var(--r); padding: 18px 20px; border-top: 2px solid var(--purple); }
+    .metric-label { font-size: 10px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+    .metric-num   { font-family: var(--serif); font-size: 2.2rem; line-height: 1; color: var(--text); margin-bottom: 4px; }
+    .metric-sub   { font-size: 11px; color: var(--text-2); line-height: 1.4; }
 
-    /* ── RESULTS GRID ── */
-    .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media(max-width:860px){ .results-grid{ grid-template-columns:1fr; } }
-    .full { grid-column: 1 / -1; }
-
-    /* ── RESULT CARD ── */
-    .rcard { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .rcard-head {
-      display: flex; align-items: center; gap: 10px;
-      padding: 13px 18px; border-bottom: 1px solid var(--border);
-      background: var(--surface);
-    }
-    .rcard-ico { font-size: 1rem; }
-    .rcard-num { font-family: var(--serif); font-size: 12px; color: var(--purple-mid); font-style: italic; }
+    /* RESULT CARDS */
+    .results-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .rcard { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .rcard-head { display: flex; align-items: center; gap: 8px; padding: 13px 18px; border-bottom: 1px solid var(--border); background: var(--surface); }
+    .rcard-ico   { font-size: 1rem; }
+    .rcard-num   { font-family: var(--serif); font-size: 12px; color: var(--purple-mid); font-style: italic; }
     .rcard-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--text-2); }
-    .rcard-body { padding: 20px; }
+    .rcard-body  { padding: 20px; }
 
-    /* ── SYNTHESE ── */
+    /* SYNTHESE */
     .synth-blocks { display: flex; flex-direction: column; gap: 18px; }
-    .synth-block  { padding-left: 14px; border-left: 2px solid var(--border); }
+    .synth-block  { padding-left: 14px; border-left: 2px solid var(--border); transition: border-left-color .15s; }
     .synth-block:hover { border-left-color: var(--purple); }
     .synth-block-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .09em; color: var(--purple); margin-bottom: 5px; }
     .synth-block-body  { font-size: 13px; color: var(--text-2); line-height: 1.75; }
     .synth-block-body strong { color: var(--text); font-weight: 500; }
 
-    /* ── SWOT ── */
-    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .sq { border-radius: 8px; padding: 16px; }
+    /* SWOT — 3 colonnes par quadrant */
+    .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .sq { border-radius: 8px; padding: 18px; }
     .sq.f { background: var(--teal-bg);   border: 1px solid #a7f3d0; }
     .sq.w { background: var(--amber-bg);  border: 1px solid #fcd34d; }
     .sq.o { background: var(--purple-bg); border: 1px solid #c4b5fd; }
     .sq.t { background: var(--red-bg);    border: 1px solid #fca5a5; }
-    .sq-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+    .sq-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 12px; }
     .sq.f .sq-title { color: var(--teal); }
     .sq.w .sq-title { color: var(--amber); }
     .sq.o .sq-title { color: var(--purple); }
     .sq.t .sq-title { color: var(--red); }
     .sq ul { list-style: none; }
-    .sq ul li { font-size: .81rem; color: var(--text-2); line-height: 1.55; padding: 3px 0; display: flex; gap: 7px; }
-    .sq ul li::before { content: '—'; opacity: .35; flex-shrink: 0; }
+    .sq ul li { font-size: .81rem; color: var(--text-2); line-height: 1.55; padding: 4px 0; display: flex; gap: 7px; border-bottom: 1px solid rgba(0,0,0,.05); }
+    .sq ul li:last-child { border-bottom: none; }
+    .sq ul li::before { content: '—'; opacity: .35; flex-shrink: 0; margin-top: 1px; }
 
-    /* ── RADAR ── */
-    .radar-wrap  { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-    #res-radar-svg { width: 100%; max-width: 290px; }
-    .score-box {
-      width: 100%; text-align: center; background: var(--purple-bg);
-      border-radius: 10px; padding: 16px; border: 1px solid #c4b5fd;
-    }
+    /* RADAR */
+    .radar-two-col { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; }
+    @media(max-width:680px){ .radar-two-col{ grid-template-columns:1fr; } }
+    .radar-left { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    #res-radar-svg { width: 100%; max-width: 260px; }
+    .score-box { width: 100%; text-align: center; background: var(--purple-bg); border-radius: 10px; padding: 14px; border: 1px solid #c4b5fd; }
     .score-lbl { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--purple); margin-bottom: 4px; }
     .score-val { font-family: var(--serif); font-size: 3rem; color: var(--purple); line-height: 1; }
     .score-max { font-size: .85rem; color: var(--purple-mid); }
     .radar-legend { width: 100%; }
-    .rl-row { padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .rl-row { padding: 7px 0; border-bottom: 1px solid var(--border); }
     .rl-row:last-child { border-bottom: none; }
     .rl-top { display: flex; align-items: center; gap: 8px; }
     .rl-name { font-size: .8rem; color: var(--text); flex: 1; }
@@ -217,37 +134,36 @@
     .rl-num { font-size: .8rem; font-weight: 600; min-width: 28px; text-align: right; }
     .rl-just { font-size: .72rem; color: var(--text-3); margin-top: 2px; }
 
-    /* ── RECOMMANDATIONS ── */
-    .reco-list { display: flex; flex-direction: column; gap: 8px; }
-    .reco-item {
-      display: flex; gap: 14px; align-items: flex-start;
-      background: var(--surface); border-radius: 8px; padding: 14px 16px;
-      border: 1px solid var(--border);
-    }
-    .reco-num {
-      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-      background: var(--purple-bg); color: var(--purple);
-      font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center;
-    }
+    /* RECOMMANDATIONS — 3 items, plus détaillés */
+    .reco-list { display: flex; flex-direction: column; gap: 10px; }
+    .reco-item { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
+    .reco-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--purple-bg); color: var(--purple); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
     .reco-body { flex: 1; }
-    .reco-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-    .reco-desc  { font-size: 12px; color: var(--text-2); line-height: 1.6; }
-    .reco-badge { font-size: .67rem; font-weight: 600; padding: 2px 9px; border-radius: 100px; flex-shrink: 0; margin-top: 2px; }
+    .reco-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+    .reco-desc  { font-size: 13px; color: var(--text-2); line-height: 1.65; }
+    .reco-meta  { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .reco-badge { font-size: .67rem; font-weight: 600; padding: 2px 9px; border-radius: 100px; white-space: nowrap; }
     .bc { background: var(--teal-bg);   color: var(--teal); }
     .bm { background: var(--amber-bg);  color: var(--amber); }
     .bl { background: var(--purple-bg); color: var(--purple); }
+    .bcat { background: var(--surface); color: var(--text-2); border: 1px solid var(--border); }
 
-    /* ── ACTIONS ── */
+    /* SOURCES */
+    .sources-list { display: flex; flex-direction: column; gap: 8px; }
+    .source-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .source-item:last-child { border-bottom: none; }
+    .source-num { font-size: 11px; font-weight: 600; color: var(--purple-mid); min-width: 20px; margin-top: 2px; }
+    .source-content { flex: 1; }
+    .source-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+    .source-url { font-size: 11px; color: var(--purple); text-decoration: none; word-break: break-all; }
+    .source-url:hover { text-decoration: underline; }
+    .source-desc { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+
     .actions { display: flex; gap: 10px; justify-content: center; margin-top: 28px; }
-    .btn-sec {
-      padding: 10px 24px; background: var(--white); border: 1px solid var(--border);
-      color: var(--text); border-radius: 8px; font-size: .85rem; font-family: var(--font);
-      cursor: pointer; transition: border-color .15s;
-    }
+    .btn-sec { padding: 10px 24px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-size: .85rem; font-family: var(--font); cursor: pointer; transition: border-color .15s, color .15s; }
     .btn-sec:hover { border-color: var(--purple); color: var(--purple); }
 
     .hidden { display: none !important; }
-
     @media print {
       body { padding: 0; }
       .actions, #section-form, #section-loading { display: none !important; }
@@ -257,7 +173,7 @@
 </head>
 <body>
 
-<!-- ── FORMULAIRE ── -->
+<!-- FORMULAIRE -->
 <div id="section-form">
   <div class="app-header">
     <div class="logo">
@@ -272,7 +188,6 @@
       <span>💡 Agent Recommandations</span>
     </div>
   </div>
-
   <div class="form-card">
     <div class="form-group">
       <label>Entreprise à analyser</label>
@@ -296,7 +211,7 @@
   </div>
 </div>
 
-<!-- ── CHARGEMENT ── -->
+<!-- CHARGEMENT -->
 <div id="section-loading" class="hidden">
   <div class="loading-title">
     <h2>Analyse en cours…</h2>
@@ -310,24 +225,21 @@
   </div>
 </div>
 
-<!-- ── RÉSULTATS ── -->
+<!-- RÉSULTATS -->
 <div id="section-results" class="hidden">
   <div class="results-wrap">
 
     <div class="results-head">
-      <div class="rh-left">
-        <div class="rh-eyebrow">Rapport d'analyse stratégique</div>
-        <div class="rh-title">Analyse <em id="res-company"></em></div>
-        <div class="rh-ts" id="res-ts"></div>
-      </div>
+      <div class="rh-eyebrow">Rapport d'analyse stratégique</div>
+      <div class="rh-title">Analyse <em id="res-company"></em></div>
+      <div class="rh-ts" id="res-ts"></div>
     </div>
 
-    <!-- Métriques extraites dynamiquement -->
     <div class="metrics-row" id="res-metrics" style="display:none"></div>
 
     <div class="results-grid">
 
-      <div class="rcard full">
+      <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">📋</span><span class="rcard-num">01&nbsp;</span><span class="rcard-label">Synthèse &amp; Actualité</span></div>
         <div class="rcard-body"><div class="synth-blocks" id="res-synthese"></div></div>
       </div>
@@ -340,20 +252,27 @@
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">📡</span><span class="rcard-num">03&nbsp;</span><span class="rcard-label">Radar Maturité DATA/IA</span></div>
         <div class="rcard-body">
-          <div class="radar-wrap">
-            <svg id="res-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
-            <div class="score-box">
-              <div class="score-lbl">Score global de maturité</div>
-              <div><span class="score-val" id="res-score">—</span><span class="score-max"> / 5</span></div>
+          <div class="radar-two-col">
+            <div class="radar-left">
+              <svg id="res-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+              <div class="score-box">
+                <div class="score-lbl">Score global de maturité</div>
+                <div><span class="score-val" id="res-score">—</span><span class="score-max"> / 5</span></div>
+              </div>
             </div>
             <div class="radar-legend" id="res-rl"></div>
           </div>
         </div>
       </div>
 
-      <div class="rcard full">
+      <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">💡</span><span class="rcard-num">04&nbsp;</span><span class="rcard-label">Recommandations Stratégiques</span></div>
         <div class="rcard-body"><div class="reco-list" id="res-recos"></div></div>
+      </div>
+
+      <div class="rcard">
+        <div class="rcard-head"><span class="rcard-ico">🔗</span><span class="rcard-num">05&nbsp;</span><span class="rcard-label">Sources utilisées</span></div>
+        <div class="rcard-body"><div class="sources-list" id="res-sources"></div></div>
       </div>
 
     </div>
@@ -370,10 +289,10 @@ const API_URL = 'https://api.anthropic.com/v1/messages';
 function $(id){ return document.getElementById(id); }
 
 function setAgent(n, state){
-  const card = $(`ac-${n}`), badge = $(`ab-${n}`);
+  const card=$(`ac-${n}`), badge=$(`ab-${n}`);
   if(!card||!badge) return;
-  card.className = 'agent-card' + (state!=='pending'?' '+state:'');
-  const cfg = {
+  card.className='agent-card'+(state!=='pending'?' '+state:'');
+  const cfg={
     pending:{cls:'b-pending',lbl:'En attente'},
     running:{cls:'b-running',lbl:'<span class="spinner"></span>En cours…'},
     done:   {cls:'b-done',   lbl:'✓ Terminé'},
@@ -390,7 +309,7 @@ async function callAgent(apiKey, model, system, user, agentN){
   try{
     let messages=[{role:'user',content:user}], maxCont=6;
     while(maxCont-->0){
-      const res = await fetch(API_URL,{
+      const res=await fetch(API_URL,{
         method:'POST',
         headers:{
           'x-api-key':apiKey,
@@ -398,9 +317,9 @@ async function callAgent(apiKey, model, system, user, agentN){
           'anthropic-dangerous-direct-browser-access':'true',
           'content-type':'application/json'
         },
-        body:JSON.stringify({model,system,messages,max_tokens:agentN===1?2000:1200})
+        body:JSON.stringify({model,system,messages,max_tokens:agentN===1?2000:1400})
       });
-      if(!res.ok){ let e=`HTTP ${res.status}`; try{const j=await res.json();e=j.error?.message||e;}catch(_){} throw new Error(e); }
+      if(!res.ok){let e=`HTTP ${res.status}`;try{const j=await res.json();e=j.error?.message||e;}catch(_){}throw new Error(e);}
       const data=await res.json();
       const txt=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
       if(data.stop_reason==='end_turn'){setAgent(agentN,'done');return txt;}
@@ -415,12 +334,12 @@ async function callAgent(apiKey, model, system, user, agentN){
 function prompts(company){
   return {
     synthese:{
-      system:`Tu es un analyste stratégique senior. Rédige des synthèses précises, factuelles et structurées en français.`,
-      user:`Effectue une synthèse complète de l'entreprise "${company}".\n\nStructure avec ces sections (utilise **TITRE** en majuscules gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité principale, date de création, siège social\n**2. CHIFFRES CLÉS** — Chiffre d'affaires, effectifs, présence géographique. Mets en valeur les chiffres importants.\n**3. MODÈLE ÉCONOMIQUE** — Sources de revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position marché, principaux concurrents\n**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents\n\nSois factuel et concis. 450 mots maximum.`
+      system:`Tu es un analyste stratégique senior. Rédige des synthèses précises et factuelles en français.`,
+      user:`Synthèse complète de "${company}".\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date création, siège\n**2. CHIFFRES CLÉS** — Format EXACT pour chaque ligne : "Libellé : CHIFFRE unité (contexte court)". Exemple : "Chiffre d'affaires : 2,3 Mds€ (exercice 2024)". Donne exactement 4 chiffres clés.\n**3. MODÈLE ÉCONOMIQUE** — Sources revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position marché, concurrents\n**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents\n\n450 mots maximum.`
     },
     swot:{
       system:`Tu es consultant expert en stratégie. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`SWOT de "${company}". JSON uniquement :\n{"forces":["F1","F2","F3","F4"],"faiblesses":["W1","W2","W3","W4"],"opportunites":["O1","O2","O3","O4"],"menaces":["T1","T2","T3","T4"]}\n4 éléments par liste, max 15 mots chacun.`
+      user:`SWOT détaillé et précis de "${company}". JSON uniquement :\n{\n  "forces":["item1","item2","item3","item4","item5","item6"],\n  "faiblesses":["item1","item2","item3","item4","item5","item6"],\n  "opportunites":["item1","item2","item3","item4","item5","item6"],\n  "menaces":["item1","item2","item3","item4","item5","item6"]\n}\nEXACTEMENT 6 éléments par liste. Chaque élément doit être PRÉCIS et SPÉCIFIQUE à l'entreprise, pas générique. Max 20 mots par élément.`
     },
     radar:{
       system:`Tu es expert en transformation digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
@@ -428,41 +347,48 @@ function prompts(company){
     },
     recos:{
       system:`Tu es consultant senior en stratégie digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`5 recommandations pour "${company}". JSON uniquement :\n{"recommandations":[{"priorite":1,"titre":"max 8 mots","description":"max 25 mots","impact":"court","categorie":"strategie"}]}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. 5 exactement.`
+      user:`3 recommandations stratégiques PRIORITAIRES et DÉTAILLÉES pour "${company}". JSON uniquement :\n{\n  "recommandations":[\n    {\n      "priorite":1,\n      "titre":"max 8 mots",\n      "description":"Description détaillée et actionnable, 40-50 mots, avec contexte et impact attendu",\n      "impact":"court",\n      "categorie":"strategie"\n    }\n  ]\n}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3 recommandations.`
+    },
+    sources:{
+      system:`Tu es un assistant de recherche documentaire. RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:`Liste les sources web réelles et vérifiables que tu utiliserais pour analyser "${company}". Sites officiels, articles de presse, rapports, bases de données.\n\nJSON uniquement :\n{\n  "sources":[\n    {\n      "titre":"Titre de la source",\n      "url":"https://url-reelle.com/page",\n      "description":"Ce qu'on y trouve en 10 mots max"\n    }\n  ]\n}\nDonne 6 sources RÉELLES avec URLs valides : site officiel, Wikipedia, LinkedIn, articles de presse récents, rapports sectoriels. Vérifie que les URLs existent vraiment.`
     }
   };
 }
 
-// Extrait les chiffres clés de la section CHIFFRES CLÉS pour les afficher en métriques
-function extractMetrics(txt){
-  const section = txt.match(/\*\*2\.\s*CHIFFRES\s*CLÉS?\*\*([\s\S]*?)(?=\*\*3\.|$)/i);
+function parseMetrics(txt){
+  const section=txt.match(/\*\*2\.\s*CHIFFRES\s*CL[EÉ]S?\*\*([\s\S]*?)(?=\*\*3\.|$)/i);
   if(!section) return [];
-  const lines = section[1].split('\n').filter(l => l.trim().length > 5).slice(0,4);
-  return lines.map(l => {
-    const clean = l.replace(/^\s*[-–—•*]\s*/,'').replace(/\*\*(.+?)\*\*/g,'$1').trim();
-    const parts = clean.split(/[:—–]/);
-    if(parts.length >= 2){
-      return { label: parts[0].trim(), value: parts.slice(1).join(' ').trim() };
-    }
-    return null;
-  }).filter(Boolean);
+  const lines=section[1].split('\n').filter(l=>l.trim().length>4);
+  const results=[];
+  for(const line of lines){
+    const clean=line.replace(/^\s*[-–—•*]\s*/,'').replace(/\*\*(.+?)\*\*/g,'$1').trim();
+    const colonIdx=clean.indexOf(':');
+    if(colonIdx<0) continue;
+    const label=clean.substring(0,colonIdx).trim();
+    const rest=clean.substring(colonIdx+1).trim();
+    const numMatch=rest.match(/^([\d\s,.]+\s*(?:M€|Mds€|M\$|Mds\$|Md€|milliards?|millions?|%|k€|K€|€|\$|£)?(?:\s*(?:par\s+an|annuels?|mensuels?)?)?)/i);
+    const numPart=numMatch?numMatch[1].trim():rest.split(/[,(]/)[0].trim().substring(0,25);
+    const ctxMatch=rest.match(/\(([^)]+)\)/);
+    const ctx=ctxMatch?ctxMatch[1]:rest.replace(numPart,'').replace(/^\s*[-–,]\s*/,'').trim().substring(0,60);
+    if(label&&numPart) results.push({label,num:numPart,ctx});
+    if(results.length>=4) break;
+  }
+  return results;
 }
 
 function renderSynthese(txt){
-  // Métriques
-  const metrics = extractMetrics(txt);
-  const mWrap = $('res-metrics');
-  if(metrics.length > 0){
-    mWrap.style.display = 'grid';
-    mWrap.innerHTML = metrics.map(m => `
+  const metrics=parseMetrics(txt);
+  const mWrap=$('res-metrics');
+  if(metrics.length>0){
+    mWrap.style.display='grid';
+    mWrap.innerHTML=metrics.map(m=>`
       <div class="metric-card">
         <div class="metric-label">${m.label}</div>
-        <div class="metric-value">${extractNumber(m.value)}</div>
-        <div class="metric-sub">${extractContext(m.value)}</div>
+        <div class="metric-num">${m.num}</div>
+        <div class="metric-sub">${m.ctx}</div>
       </div>`).join('');
   }
-
-  // Sections
   const sections=[], regex=/\*\*(\d+\.\s*.+?)\*\*([\s\S]*?)(?=\*\*\d+\.|$)/g;
   let match;
   while((match=regex.exec(txt))!==null) sections.push({title:match[1].trim(),body:match[2].trim()});
@@ -470,32 +396,15 @@ function renderSynthese(txt){
     $('res-synthese').innerHTML=`<div class="synth-block"><div class="synth-block-body">${txt.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}</div></div>`;
     return;
   }
-  $('res-synthese').innerHTML = sections.map(s=>{
-    const body = s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+  $('res-synthese').innerHTML=sections.map(s=>{
+    const body=s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
       .split('\n').filter(l=>l.trim()).map(l=>`<p style="margin-bottom:5px">${l.replace(/^[-–—•]\s*/,'')}</p>`).join('');
     return `<div class="synth-block"><div class="synth-block-title">${s.title}</div><div class="synth-block-body">${body}</div></div>`;
   }).join('');
 }
 
-function extractNumber(str){
-  // Essaie d'extraire la valeur clé (chiffre + unité) pour l'afficher grande
-  const m = str.match(/[\d\s,.]+[MBK€%$]?\s*(?:millions?|milliards?|M€|M\$|B€|\%)?/i);
-  if(m) return m[0].trim().substring(0,20);
-  const words = str.split(/\s+/);
-  return words.slice(0, Math.min(3, words.length)).join(' ');
-}
-
-function extractContext(str){
-  return str.length > 30 ? str.substring(0,60)+'…' : str;
-}
-
 function renderSWOT(d){
-  const quads=[
-    {key:'forces',cls:'f',title:'Forces'},
-    {key:'faiblesses',cls:'w',title:'Faiblesses'},
-    {key:'opportunites',cls:'o',title:'Opportunités'},
-    {key:'menaces',cls:'t',title:'Menaces'}
-  ];
+  const quads=[{key:'forces',cls:'f',title:'Forces'},{key:'faiblesses',cls:'w',title:'Faiblesses'},{key:'opportunites',cls:'o',title:'Opportunités'},{key:'menaces',cls:'t',title:'Menaces'}];
   $('res-swot').innerHTML=quads.map(q=>`
     <div class="sq ${q.cls}">
       <div class="sq-title">${q.title}</div>
@@ -550,17 +459,34 @@ function renderRecos(d){
       <div class="reco-body">
         <div class="reco-title">${ico[r.categorie]||'💡'} ${r.titre}</div>
         <div class="reco-desc">${r.description}</div>
+        <div class="reco-meta">
+          <span class="reco-badge ${i.cls}">${i.lbl}</span>
+          <span class="reco-badge bcat">${r.categorie}</span>
+        </div>
       </div>
-      <span class="reco-badge ${i.cls}">${i.lbl}</span>
     </div>`;
   }).join('');
 }
 
+function renderSources(d){
+  const sources=d.sources||[];
+  if(sources.length===0){
+    $('res-sources').innerHTML=`<p style="color:var(--text-3);font-size:13px">Aucune source disponible.</p>`;
+    return;
+  }
+  $('res-sources').innerHTML=sources.map((s,i)=>`
+    <div class="source-item">
+      <div class="source-num">${i+1}</div>
+      <div class="source-content">
+        <div class="source-title">${s.titre}</div>
+        <a class="source-url" href="${s.url}" target="_blank" rel="noopener">${s.url}</a>
+        ${s.description?`<div class="source-desc">${s.description}</div>`:''}
+      </div>
+    </div>`).join('');
+}
+
 async function startAnalysis(){
-  const company=$('inp-company').value.trim();
-  const apiKey=$('inp-apikey').value.trim();
-  const model=$('inp-model').value;
-  const errBox=$('err-box');
+  const company=$('inp-company').value.trim(), apiKey=$('inp-apikey').value.trim(), model=$('inp-model').value, errBox=$('err-box');
   errBox.classList.add('hidden'); errBox.textContent='';
   if(!company){errBox.textContent='Veuillez saisir le nom d\'une entreprise.';errBox.classList.remove('hidden');return;}
   if(!apiKey){errBox.textContent='Veuillez saisir votre clé API Anthropic.';errBox.classList.remove('hidden');return;}
@@ -573,24 +499,33 @@ async function startAnalysis(){
   [1,2,3,4].forEach(i=>setAgent(i,'pending'));
   const p=prompts(company);
   try{
-    const [r1,r2,r3,r4]=await Promise.allSettled([
+    const [r1,r2,r3,r4,r5]=await Promise.allSettled([
       callAgent(apiKey,model,p.synthese.system,p.synthese.user,1),
       callAgent(apiKey,model,p.swot.system,p.swot.user,2),
       callAgent(apiKey,model,p.radar.system,p.radar.user,3),
-      callAgent(apiKey,model,p.recos.system,p.recos.user,4)
+      callAgent(apiKey,model,p.recos.system,p.recos.user,4),
+      callAgent(apiKey,model,p.sources.system,p.sources.user,4) // agent 4 réutilisé visuellement
     ]);
     $('section-loading').classList.add('hidden');
     $('section-results').classList.remove('hidden');
     $('res-company').textContent=company;
     $('res-ts').textContent=`Généré le ${new Date().toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'})} · Modèle : ${model}`;
+
     if(r1.status==='fulfilled'){renderSynthese(r1.value);}
     else{$('res-synthese').innerHTML=`<div class="synth-block"><div class="synth-block-body" style="color:var(--red)">⚠ ${r1.reason?.message}</div></div>`;}
+
     if(r2.status==='fulfilled'){try{renderSWOT(parseJSON(r2.value));}catch(e){$('res-swot').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing SWOT</p>`;}}
     else{$('res-swot').innerHTML=`<p style="color:var(--red)">⚠ ${r2.reason?.message}</p>`;}
+
     if(r3.status==='fulfilled'){try{renderRadar(parseJSON(r3.value));}catch(e){$('res-radar-svg').parentElement.innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Radar</p>`;}}
     else{$('res-rl').innerHTML=`<p style="color:var(--red)">⚠ ${r3.reason?.message}</p>`;}
+
     if(r4.status==='fulfilled'){try{renderRecos(parseJSON(r4.value));}catch(e){$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Recos</p>`;}}
     else{$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ ${r4.reason?.message}</p>`;}
+
+    if(r5.status==='fulfilled'){try{renderSources(parseJSON(r5.value));}catch(e){$('res-sources').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Sources</p>`;}}
+    else{$('res-sources').innerHTML=`<p style="color:var(--red)">⚠ ${r5.reason?.message}</p>`;}
+
   }catch(globalErr){
     $('section-loading').classList.add('hidden');
     $('section-form').classList.remove('hidden');
