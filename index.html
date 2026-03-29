@@ -362,11 +362,12 @@ async function runResearchAgent(apiKey, model, company){
   const system = `Tu es un agent de veille stratégique. Tu fais des recherches web ciblées et concises sur une entreprise. Tu cherches : chiffres clés récents, vision et prises de parole du dirigeant, plan stratégique annoncé, actualités 2024-2025. Tu synthétises en bullet points courts et factuels.`;
   const userPrompt = `Recherche rapide sur "${company}". Fais 3-4 recherches web ciblées :\n- "${company} stratégie plan 2025 2026"\n- "${company} PDG CEO interview vision"\n- "${company} résultats chiffres clés"\n- "${company} actualité 2024 2025"\n\nSynthétise en bullet points courts (max 15 mots par point) sur : chiffres clés, vision du dirigeant, axes stratégiques, actualités récentes. Inclus les URLs trouvées.`;
 
-  let messages = [{role:'user', content: userPrompt}];
+  const initialMsg = {role:'user', content: userPrompt};
+  let messages = [initialMsg];
   let iterations = 0;
 
-  while(iterations++ < 6){
-    const data = await callAPI(apiKey, model, system, messages, 1500, tools);
+  while(iterations++ < 3){
+    const data = await callAPI(apiKey, model, system, messages, 800, tools);
     const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
     const toolUseBlocks = (data.content||[]).filter(b=>b.type==='tool_use');
 
@@ -375,7 +376,9 @@ async function runResearchAgent(apiKey, model, company){
       return textBlocks;
     }
     if(data.stop_reason==='tool_use'){
-      messages = [...messages, {role:'assistant', content: data.content}];
+      // Ne conserver que le message initial + dernier échange pour limiter les tokens
+      const trimmedContent = data.content.filter(b => b.type === 'tool_use');
+      messages = [initialMsg, {role:'assistant', content: trimmedContent}];
       const toolResults = toolUseBlocks.map(tu => ({
         type:'tool_result', tool_use_id:tu.id,
         content:`Recherche: ${JSON.stringify(tu.input)}`
