@@ -21,7 +21,6 @@
     }
     body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; padding: 40px 20px 80px; }
 
-    /* HEADER */
     .app-header { text-align: center; margin-bottom: 40px; }
     .logo { display: inline-flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .logo-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--purple-bg); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
@@ -30,7 +29,6 @@
     .agents-pill { display: inline-flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; justify-content: center; }
     .agents-pill span { background: var(--surface); border: 1px solid var(--border); border-radius: 100px; padding: 4px 12px; font-size: 0.72rem; color: var(--text-2); }
 
-    /* FORM */
     .form-card { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 28px; max-width: 660px; margin: 0 auto; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
     .form-group { margin-bottom: 16px; }
     .form-group label { display: block; font-size: 0.72rem; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px; }
@@ -44,18 +42,14 @@
     .btn-analyze:disabled { opacity: .4; cursor: not-allowed; transform: none; }
     .error-box { background: var(--red-bg); border: 1px solid #fecaca; border-radius: 8px; padding: 11px 14px; color: var(--red); font-size: .85rem; margin-top: 12px; }
 
-    /* LOADING */
     #section-loading { max-width: 760px; margin: 0 auto; }
     .loading-title { text-align: center; margin-bottom: 24px; }
     .loading-title h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--text); }
     .loading-title p { color: var(--text-2); margin-top: 4px; font-size: .88rem; }
-
-    /* Agent 0 — recherche */
     .agent0-wrap { background: var(--blue-bg); border: 1px solid #bfdbfe; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px; }
     .agent0-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--blue); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
     .agent0-status { font-size: 13px; color: var(--text-2); }
     .agent0-status strong { color: var(--text); font-weight: 500; }
-
     .agents-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
     @media(max-width:580px){ .agents-grid{ grid-template-columns:repeat(2,1fr); } }
     .agent-card { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px 12px; text-align: center; transition: border-color .25s; }
@@ -72,7 +66,6 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(80,70,228,.25); border-top-color: var(--purple); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; margin-right: 4px; }
 
-    /* RESULTS */
     .results-wrap { max-width: 1080px; margin: 0 auto; }
     .results-head { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
     .rh-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--purple); margin-bottom: 6px; }
@@ -80,7 +73,6 @@
     .rh-title em { font-style: italic; color: var(--purple); }
     .rh-ts { font-size: .78rem; color: var(--text-3); margin-top: 6px; }
 
-    /* METRICS */
     .metrics-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 28px; }
     @media(max-width:720px){ .metrics-row{ grid-template-columns: repeat(2,1fr); } }
     .metric-card { background: var(--surface); border-radius: var(--r); padding: 18px 20px; border-top: 2px solid var(--purple); }
@@ -88,7 +80,6 @@
     .metric-num   { font-family: var(--serif); font-size: 2.2rem; line-height: 1; color: var(--text); margin-bottom: 4px; }
     .metric-sub   { font-size: 11px; color: var(--text-2); line-height: 1.4; }
 
-    /* RESULT CARDS */
     .results-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     .rcard { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
     .rcard-head { display: flex; align-items: center; gap: 8px; padding: 13px 18px; border-bottom: 1px solid var(--border); background: var(--surface); }
@@ -97,7 +88,6 @@
     .rcard-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; color: var(--text-2); }
     .rcard-body  { padding: 20px; }
 
-    /* SYNTHESE */
     .synth-blocks { display: flex; flex-direction: column; gap: 18px; }
     .synth-block  { padding-left: 14px; border-left: 2px solid var(--border); transition: border-left-color .15s; }
     .synth-block:hover { border-left-color: var(--purple); }
@@ -105,7 +95,6 @@
     .synth-block-body  { font-size: 13px; color: var(--text-2); line-height: 1.75; }
     .synth-block-body strong { color: var(--text); font-weight: 500; }
 
-    /* SWOT */
     .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .sq { border-radius: 8px; padding: 18px; }
     .sq.f { background: var(--teal-bg);   border: 1px solid #a7f3d0; }
@@ -122,7 +111,6 @@
     .sq ul li:last-child { border-bottom: none; }
     .sq ul li::before { content: '—'; opacity: .35; flex-shrink: 0; margin-top: 1px; }
 
-    /* RADAR */
     .radar-two-col { display: grid; grid-template-columns: 260px 1fr; gap: 24px; align-items: start; }
     @media(max-width:680px){ .radar-two-col{ grid-template-columns:1fr; } }
     .radar-left { display: flex; flex-direction: column; align-items: center; gap: 14px; }
@@ -142,7 +130,6 @@
     .rl-num { font-size: .8rem; font-weight: 600; min-width: 28px; text-align: right; }
     .rl-just { font-size: .72rem; color: var(--text-3); margin-top: 2px; }
 
-    /* RECOMMANDATIONS */
     .reco-list { display: flex; flex-direction: column; gap: 10px; }
     .reco-item { display: flex; gap: 16px; align-items: flex-start; background: var(--surface); border-radius: 8px; padding: 16px 18px; border: 1px solid var(--border); }
     .reco-num { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; background: var(--purple-bg); color: var(--purple); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
@@ -156,8 +143,7 @@
     .bl { background: var(--purple-bg); color: var(--purple); }
     .bcat { background: var(--surface); color: var(--text-2); border: 1px solid var(--border); }
 
-    /* SOURCES */
-    .sources-list { display: flex; flex-direction: column; gap: 0; }
+    .sources-list { display: flex; flex-direction: column; }
     .source-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
     .source-item:last-child { border-bottom: none; }
     .source-num { font-size: 11px; font-weight: 600; color: var(--purple-mid); min-width: 20px; margin-top: 2px; }
@@ -170,7 +156,6 @@
     .actions { display: flex; gap: 10px; justify-content: center; margin-top: 28px; }
     .btn-sec { padding: 10px 24px; background: var(--bg); border: 1px solid var(--border); color: var(--text); border-radius: 8px; font-size: .85rem; font-family: var(--font); cursor: pointer; transition: border-color .15s, color .15s; }
     .btn-sec:hover { border-color: var(--purple); color: var(--purple); }
-
     .hidden { display: none !important; }
     @media print {
       body { padding: 0; }
@@ -210,8 +195,8 @@
       <div class="form-group">
         <label>Modèle</label>
         <select id="inp-model">
-          <option value="claude-opus-4-6">Claude Opus 4.6 ✦ Meilleur</option>
-          <option value="claude-sonnet-4-6">Claude Sonnet 4.6 ⚡ Rapide</option>
+          <option value="claude-sonnet-4-6" selected>Claude Sonnet 4.6 ⚡ Recommandé</option>
+          <option value="claude-opus-4-6">Claude Opus 4.6 ✦ Premium</option>
         </select>
       </div>
     </div>
@@ -226,16 +211,13 @@
     <h2>Analyse en cours…</h2>
     <p>Recherche documentaire puis analyse multi-agents sur <strong id="lbl-company"></strong></p>
   </div>
-
-  <!-- Agent 0 — recherche web -->
   <div class="agent0-wrap">
     <div class="agent0-label">
       <span class="spinner" id="a0-spinner" style="display:none"></span>
       🔍 Agent Recherche — collecte de sources
     </div>
-    <div class="agent0-status" id="a0-status">En attente de lancement…</div>
+    <div class="agent0-status" id="a0-status">En attente…</div>
   </div>
-
   <div class="agents-grid">
     <div class="agent-card" id="ac-1"><div class="agent-emoji">📋</div><div class="agent-label">Synthèse</div><div><span class="agent-badge b-pending" id="ab-1">En attente</span></div></div>
     <div class="agent-card" id="ac-2"><div class="agent-emoji">⚖️</div><div class="agent-label">SWOT</div><div><span class="agent-badge b-pending" id="ab-2">En attente</span></div></div>
@@ -247,27 +229,21 @@
 <!-- RÉSULTATS -->
 <div id="section-results" class="hidden">
   <div class="results-wrap">
-
     <div class="results-head">
       <div class="rh-eyebrow">Rapport d'analyse stratégique</div>
       <div class="rh-title">Analyse <em id="res-company"></em></div>
       <div class="rh-ts" id="res-ts"></div>
     </div>
-
     <div class="metrics-row" id="res-metrics" style="display:none"></div>
-
     <div class="results-grid">
-
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">📋</span><span class="rcard-num">01&nbsp;</span><span class="rcard-label">Synthèse &amp; Vision stratégique</span></div>
         <div class="rcard-body"><div class="synth-blocks" id="res-synthese"></div></div>
       </div>
-
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">⚖️</span><span class="rcard-num">02&nbsp;</span><span class="rcard-label">Analyse SWOT</span></div>
         <div class="rcard-body"><div class="swot-grid" id="res-swot"></div></div>
       </div>
-
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">📡</span><span class="rcard-num">03&nbsp;</span><span class="rcard-label">Radar Maturité DATA/IA</span></div>
         <div class="rcard-body">
@@ -283,19 +259,15 @@
           </div>
         </div>
       </div>
-
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">💡</span><span class="rcard-num">04&nbsp;</span><span class="rcard-label">Recommandations Stratégiques</span></div>
         <div class="rcard-body"><div class="reco-list" id="res-recos"></div></div>
       </div>
-
       <div class="rcard">
         <div class="rcard-head"><span class="rcard-ico">🔗</span><span class="rcard-num">05&nbsp;</span><span class="rcard-label">Sources consultées</span></div>
         <div class="rcard-body"><div class="sources-list" id="res-sources"></div></div>
       </div>
-
     </div>
-
     <div class="actions">
       <button class="btn-sec" onclick="window.print()">🖨️ Imprimer / PDF</button>
       <button class="btn-sec" onclick="newAnalysis()">🔄 Nouvelle analyse</button>
@@ -305,6 +277,9 @@
 
 <script>
 const API_URL = 'https://api.anthropic.com/v1/messages';
+// Limite stricte du contexte injecté dans chaque agent (en caractères)
+const MAX_CTX_CHARS = 2000;
+
 function $(id){ return document.getElementById(id); }
 
 function setAgent(n, state){
@@ -321,29 +296,49 @@ function setAgent(n, state){
 }
 
 function setAgent0(state, msg){
-  const spinner = $('a0-spinner');
-  const status  = $('a0-status');
-  const wrap    = spinner.closest('.agent0-wrap');
-  if(state==='running'){
-    spinner.style.display='inline-block';
-    wrap.style.borderColor='#93c5fd';
-    status.innerHTML=msg;
-  } else if(state==='done'){
-    spinner.style.display='none';
-    wrap.style.borderColor='#6ee7b7';
-    wrap.style.background='#f0fdf4';
-    status.innerHTML=msg;
-  } else if(state==='error'){
-    spinner.style.display='none';
-    wrap.style.borderColor='#fca5a5';
-    status.innerHTML=`<span style="color:var(--red)">${msg}</span>`;
-  }
+  const spinner=$('a0-spinner'), status=$('a0-status'), wrap=spinner.closest('.agent0-wrap');
+  if(state==='running'){ spinner.style.display='inline-block'; wrap.style.borderColor='#93c5fd'; status.innerHTML=msg; }
+  else if(state==='done'){ spinner.style.display='none'; wrap.style.borderColor='#6ee7b7'; wrap.style.background='#f0fdf4'; status.innerHTML=msg; }
+  else if(state==='error'){ spinner.style.display='none'; wrap.style.borderColor='#fca5a5'; status.innerHTML=`<span style="color:var(--red)">${msg}</span>`; }
 }
 
 function parseJSON(txt){ const m=txt.match(/\{[\s\S]*\}/); return JSON.parse(m?m[0]:txt.trim()); }
 function scoreColor(s){ return s>=4?'#0d9373':s>=3?'#5046e4':s>=2?'#b45309':'#b91c1c'; }
 
-// ── Appel API générique ──
+// ── Extrait les passages les plus pertinents du rapport de recherche ──
+// Priorité : chiffres, vision dirigeant, plan stratégique, actualité récente
+function extractKeyContext(report, maxChars){
+  if(!report || report.length === 0) return '';
+
+  // Mots-clés à prioriser
+  const priorityPatterns = [
+    /vision|stratégi|objectif|ambit|plan|priorité|cap |feuille de route/i,
+    /dirigeant|PDG|CEO|président|directeur.*général|interview|déclar|annonce/i,
+    /chiffre.d.affaires|revenus?|millions?|milliards?|croissance|résultat/i,
+    /2025|2026|2027|2028|2029|2030/i,
+    /acquisition|fusion|partenariat|lancement|investissement/i
+  ];
+
+  const lines = report.split('\n').filter(l => l.trim().length > 20);
+  const scored = lines.map(line => {
+    let score = 0;
+    priorityPatterns.forEach(p => { if(p.test(line)) score++; });
+    return { line, score };
+  });
+
+  // Trier par score décroissant
+  scored.sort((a,b) => b.score - a.score);
+
+  // Reconstruire en respectant la limite de caractères
+  let result = '';
+  for(const {line} of scored){
+    if(result.length + line.length + 1 > maxChars) break;
+    result += line + '\n';
+  }
+
+  return result.trim();
+}
+
 async function callAPI(apiKey, model, system, messages, maxTokens, tools){
   const body = { model, system, messages, max_tokens: maxTokens };
   if(tools) body.tools = tools;
@@ -361,88 +356,47 @@ async function callAPI(apiKey, model, system, messages, maxTokens, tools){
   return res.json();
 }
 
-// ── Agent 0 : recherche web avec l'outil web_search ──
 async function runResearchAgent(apiKey, model, company){
-  setAgent0('running', `Recherche en cours sur <strong>${company}</strong> : rapports annuels, prises de parole dirigeants, stratégie…`);
-
-  const tools = [{
-    type: 'web_search_20250305',
-    name: 'web_search'
-  }];
-
-  const system = `Tu es un agent de veille stratégique. Tu effectues des recherches web approfondies sur une entreprise pour collecter des informations factuelles, récentes et fiables. Tu cherches particulièrement : les prises de parole des dirigeants, les plans stratégiques annoncés, les rapports annuels, les résultats financiers, les actualités récentes. Tu synthétises tout dans un rapport structuré en français.`;
-
-  const userPrompt = `Effectue une recherche approfondie sur l'entreprise "${company}".
-
-Cherche et collecte :
-1. **Chiffres clés récents** (CA, effectifs, résultats financiers)
-2. **Vision et ambitions du dirigeant** — interviews, prises de parole récentes, lettres aux actionnaires, conférences
-3. **Plan stratégique annoncé** — axes prioritaires, objectifs 2025-2030, transformations en cours
-4. **Actualités récentes 2024-2025** — acquisitions, partenariats, restructurations, lancements produits
-5. **Sources trouvées** — liste les URLs réelles avec titre et date
-
-Utilise l'outil web_search avec des requêtes variées :
-- "${company} stratégie 2025 2026"
-- "${company} PDG CEO interview vision"
-- "${company} résultats annuels rapport"
-- "${company} plan transformation"
-
-Synthétise tout ce que tu trouves en un rapport factuel et sourcé.`;
+  setAgent0('running', `Recherche en cours sur <strong>${company}</strong>…`);
+  const tools = [{ type:'web_search_20250305', name:'web_search' }];
+  const system = `Tu es un agent de veille stratégique. Tu fais des recherches web ciblées et concises sur une entreprise. Tu cherches : chiffres clés récents, vision et prises de parole du dirigeant, plan stratégique annoncé, actualités 2024-2025. Tu synthétises en bullet points courts et factuels.`;
+  const userPrompt = `Recherche rapide sur "${company}". Fais 3-4 recherches web ciblées :\n- "${company} stratégie plan 2025 2026"\n- "${company} PDG CEO interview vision"\n- "${company} résultats chiffres clés"\n- "${company} actualité 2024 2025"\n\nSynthétise en bullet points courts (max 15 mots par point) sur : chiffres clés, vision du dirigeant, axes stratégiques, actualités récentes. Inclus les URLs trouvées.`;
 
   let messages = [{role:'user', content: userPrompt}];
   let iterations = 0;
-  const maxIter = 8;
 
-  while(iterations++ < maxIter){
-    const data = await callAPI(apiKey, model, system, messages, 4000, tools);
-
-    // Collecter tous les blocs texte
+  while(iterations++ < 6){
+    const data = await callAPI(apiKey, model, system, messages, 1500, tools);
     const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-    // Collecter les appels d'outil
     const toolUseBlocks = (data.content||[]).filter(b=>b.type==='tool_use');
-    // Collecter les résultats d'outil
-    const toolResultBlocks = (data.content||[]).filter(b=>b.type==='tool_result');
 
     if(data.stop_reason==='end_turn'){
-      setAgent0('done', `✓ Recherche terminée — ${toolUseBlocks.length + toolResultBlocks.length > 0 ? 'sources web collectées' : 'analyse depuis les connaissances'}`);
-      return { report: textBlocks, rawContent: data.content };
+      setAgent0('done', `✓ Recherche terminée — données collectées`);
+      return textBlocks;
     }
-
     if(data.stop_reason==='tool_use'){
-      // Continuer la conversation avec les résultats des outils
       messages = [...messages, {role:'assistant', content: data.content}];
-      // Construire les résultats d'outils pour la prochaine itération
       const toolResults = toolUseBlocks.map(tu => ({
-        type: 'tool_result',
-        tool_use_id: tu.id,
-        content: tu.input ? `Recherche effectuée pour: ${JSON.stringify(tu.input)}` : 'Résultat disponible'
+        type:'tool_result', tool_use_id:tu.id,
+        content:`Recherche: ${JSON.stringify(tu.input)}`
       }));
-      if(toolResults.length > 0){
-        messages.push({role:'user', content: toolResults});
-      }
-      setAgent0('running', `Recherche en cours… (${iterations} requêtes effectuées)`);
+      if(toolResults.length>0) messages.push({role:'user', content: toolResults});
+      setAgent0('running', `Recherche en cours… (itération ${iterations})`);
       continue;
     }
-
-    if(textBlocks){
-      setAgent0('done', '✓ Recherche terminée');
-      return { report: textBlocks, rawContent: data.content };
-    }
-
+    if(textBlocks){ setAgent0('done','✓ Collecte terminée'); return textBlocks; }
     break;
   }
-
-  setAgent0('done', '✓ Collecte terminée');
-  return { report: `Analyse de ${company} basée sur les connaissances disponibles.`, rawContent: [] };
+  setAgent0('done','✓ Analyse depuis les connaissances');
+  return '';
 }
 
-// ── Agent d'analyse (utilise le rapport de recherche) ──
 async function callAgent(apiKey, model, system, user, agentN){
   setAgent(agentN,'running');
   try{
-    let messages=[{role:'user',content:user}], maxCont=6;
+    let messages=[{role:'user',content:user}], maxCont=4;
     while(maxCont-->0){
-      const data = await callAPI(apiKey, model, system, messages, 2000);
+      const data = await callAPI(apiKey, model, system, messages, 1200);
       const txt=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
       if(data.stop_reason==='end_turn'){setAgent(agentN,'done');return txt;}
       if(data.stop_reason==='pause_turn'){messages=[{role:'user',content:messages[0].content},{role:'assistant',content:data.content}];continue;}
@@ -453,52 +407,45 @@ async function callAgent(apiKey, model, system, user, agentN){
   }catch(err){setAgent(agentN,'error');throw err;}
 }
 
-function prompts(company, researchReport){
-  const ctx = researchReport
-    ? `\n\n=== DONNÉES DE RECHERCHE COLLECTÉES ===\n${researchReport}\n=== FIN DES DONNÉES ===\n\nBase-toi en priorité sur ces données réelles pour ton analyse.`
-    : '';
+function buildContext(keyContext){
+  if(!keyContext || keyContext.trim().length === 0) return '';
+  return `\n\n--- DONNÉES RÉCENTES COLLECTÉES ---\n${keyContext}\n--- FIN ---\n\nUtilise ces données en priorité.`;
+}
 
+function prompts(company, keyContext){
+  const ctx = buildContext(keyContext);
   return {
     synthese:{
-      system:`Tu es un analyste stratégique senior. Rédige des synthèses précises et factuelles en français. Tu disposes de données de recherche récentes.`,
-      user:`Synthèse complète de "${company}".${ctx}\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date création, siège\n**2. CHIFFRES CLÉS** — Format EXACT : "Libellé : CHIFFRE unité (contexte)". 4 chiffres.\n**3. MODÈLE ÉCONOMIQUE** — Sources revenus, avantages compétitifs\n**4. POSITIONNEMENT CONCURRENTIEL** — Position marché, concurrents\n**5. VISION STRATÉGIQUE & OÙ VA L'ENTREPRISE** — Plans annoncés, ambitions du dirigeant, prises de parole récentes, objectifs 2025-2030. C'est la section la plus importante : sois précis et cite les déclarations réelles si disponibles.\n**6. ACTUALITÉ 2024-2025** — Événements récents marquants\n\n500 mots maximum.`
+      system:`Tu es un analyste stratégique senior. Synthèses précises et factuelles en français.`,
+      user:`Synthèse de "${company}".${ctx}\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date, siège\n**2. CHIFFRES CLÉS** — Format : "Libellé : CHIFFRE unité (contexte)". 4 chiffres.\n**3. MODÈLE ÉCONOMIQUE** — Revenus, avantages\n**4. POSITIONNEMENT CONCURRENTIEL** — Marché, concurrents\n**5. VISION STRATÉGIQUE & OÙ VA L'ENTREPRISE** — Plans annoncés, déclarations du dirigeant, objectifs 2025-2030. Section prioritaire : cite les prises de parole réelles si disponibles.\n**6. ACTUALITÉ 2024-2025** — Faits marquants récents\n\n450 mots max.`
     },
     swot:{
-      system:`Tu es consultant expert en stratégie. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`SWOT détaillé de "${company}".${ctx}\n\nJSON uniquement :\n{\n  "forces":["item1","item2","item3","item4","item5","item6"],\n  "faiblesses":["item1","item2","item3","item4","item5","item6"],\n  "opportunites":["item1","item2","item3","item4","item5","item6"],\n  "menaces":["item1","item2","item3","item4","item5","item6"]\n}\nEXACTEMENT 6 éléments par liste. Précis et spécifique. Max 20 mots par élément.`
+      system:`Consultant stratégie. RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:`SWOT de "${company}".${ctx}\nJSON uniquement :\n{"forces":["i1","i2","i3","i4","i5","i6"],"faiblesses":["i1","i2","i3","i4","i5","i6"],"opportunites":["i1","i2","i3","i4","i5","i6"],"menaces":["i1","i2","i3","i4","i5","i6"]}\n6 éléments précis par liste, max 20 mots chacun.`
     },
     radar:{
-      system:`Tu es expert en transformation digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`Maturité DATA/IA de "${company}".${ctx}\n\nJSON uniquement :\n{"criteres":[{"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"15 mots max"},{"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"15 mots max"},{"id":3,"nom":"Ressources et Compétences","score":X,"justification":"15 mots max"},{"id":4,"nom":"Infrastructure digitale","score":X,"justification":"15 mots max"},{"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"15 mots max"},{"id":6,"nom":"Infrastructure technologique","score":X,"justification":"15 mots max"},{"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"15 mots max"}]}\nX = entier 1-5.`
+      system:`Expert transformation digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:`Maturité DATA/IA de "${company}".${ctx}\nJSON uniquement :\n{"criteres":[{"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"15 mots"},{"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"15 mots"},{"id":3,"nom":"Ressources et Compétences","score":X,"justification":"15 mots"},{"id":4,"nom":"Infrastructure digitale","score":X,"justification":"15 mots"},{"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"15 mots"},{"id":6,"nom":"Infrastructure technologique","score":X,"justification":"15 mots"},{"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"15 mots"}]}\nX=entier 1-5.`
     },
     recos:{
-      system:`Tu es consultant senior en stratégie digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`3 recommandations stratégiques PRIORITAIRES pour "${company}".${ctx}\n\nJSON uniquement :\n{\n  "recommandations":[\n    {\n      "priorite":1,\n      "titre":"max 8 mots",\n      "description":"Description détaillée et actionnable, 40-50 mots, avec contexte et impact attendu. Tiens compte de la vision stratégique annoncée par le dirigeant.",\n      "impact":"court",\n      "categorie":"strategie"\n    }\n  ]\n}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3.`
+      system:`Consultant senior stratégie digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:`3 recommandations pour "${company}".${ctx}\nJSON uniquement :\n{"recommandations":[{"priorite":1,"titre":"max 8 mots","description":"40-50 mots, actionnable, tient compte de la vision du dirigeant","impact":"court","categorie":"strategie"}]}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3.`
     }
   };
 }
 
-// ── Extraction sources depuis le rapport de recherche ──
 function extractSources(report){
   if(!report) return [];
-  const sources = [];
-  // Cherche des URLs dans le texte
-  const urlRegex = /https?:\/\/[^\s\)\]\,\"\']+/g;
-  const titleRegex = /(?:\*\*|##?\s*)([^*\n]+?)(?:\*\*|\n)/g;
-  const urls = [...new Set(report.match(urlRegex)||[])].slice(0,8);
-
-  urls.forEach((url, i) => {
-    // Essaie de trouver un titre associé à cette URL dans le contexte
+  const urls = [...new Set((report.match(/https?:\/\/[^\s\)\]\,\"\']+/g)||[])].slice(0,8);
+  return urls.map((url,i) => {
     const urlIdx = report.indexOf(url);
-    const before = report.substring(Math.max(0, urlIdx-100), urlIdx);
-    const titleMatch = before.match(/(?:\*\*|"|\[)([^*"\[\]\n]{5,60})(?:\*\*|"|\])\s*$/);
-    const title = titleMatch ? titleMatch[1] : `Source ${i+1}`;
-    // Cherche une description dans les 150 chars après l'URL
-    const after = report.substring(urlIdx + url.length, urlIdx + url.length + 150);
-    const desc = after.replace(/^[\s\-–:]+/, '').split('\n')[0].substring(0, 80);
-    sources.push({ titre: title, url, description: desc || '' });
+    const before = report.substring(Math.max(0,urlIdx-120), urlIdx);
+    const tm = before.match(/(?:\*\*|"|\[)([^*"\[\]\n]{5,60})(?:\*\*|"|\])\s*$/);
+    const title = tm ? tm[1] : `Source ${i+1}`;
+    const after = report.substring(urlIdx+url.length, urlIdx+url.length+100);
+    const desc = after.replace(/^[\s\-–:]+/,'').split('\n')[0].substring(0,80);
+    return { titre:title, url, description:desc||'' };
   });
-  return sources;
 }
 
 function parseMetrics(txt){
@@ -508,8 +455,7 @@ function parseMetrics(txt){
   const results=[];
   for(const line of lines){
     const clean=line.replace(/^\s*[-–—•*]\s*/,'').replace(/\*\*(.+?)\*\*/g,'$1').trim();
-    const colonIdx=clean.indexOf(':');
-    if(colonIdx<0) continue;
+    const colonIdx=clean.indexOf(':'); if(colonIdx<0) continue;
     const label=clean.substring(0,colonIdx).trim();
     const rest=clean.substring(colonIdx+1).trim();
     const numMatch=rest.match(/^([\d\s,.]+\s*(?:M€|Mds€|M\$|Mds\$|Md€|milliards?|millions?|%|k€|K€|€|\$|£)?(?:\s*(?:par\s+an|annuels?|mensuels?)?)?)/i);
@@ -527,12 +473,7 @@ function renderSynthese(txt){
   const mWrap=$('res-metrics');
   if(metrics.length>0){
     mWrap.style.display='grid';
-    mWrap.innerHTML=metrics.map(m=>`
-      <div class="metric-card">
-        <div class="metric-label">${m.label}</div>
-        <div class="metric-num">${m.num}</div>
-        <div class="metric-sub">${m.ctx}</div>
-      </div>`).join('');
+    mWrap.innerHTML=metrics.map(m=>`<div class="metric-card"><div class="metric-label">${m.label}</div><div class="metric-num">${m.num}</div><div class="metric-sub">${m.ctx}</div></div>`).join('');
   }
   const sections=[], regex=/\*\*(\d+\.\s*.+?)\*\*([\s\S]*?)(?=\*\*\d+\.|$)/g;
   let match;
@@ -542,19 +483,14 @@ function renderSynthese(txt){
     return;
   }
   $('res-synthese').innerHTML=sections.map(s=>{
-    const body=s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-      .split('\n').filter(l=>l.trim()).map(l=>`<p style="margin-bottom:5px">${l.replace(/^[-–—•]\s*/,'')}</p>`).join('');
+    const body=s.body.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>').split('\n').filter(l=>l.trim()).map(l=>`<p style="margin-bottom:5px">${l.replace(/^[-–—•]\s*/,'')}</p>`).join('');
     return `<div class="synth-block"><div class="synth-block-title">${s.title}</div><div class="synth-block-body">${body}</div></div>`;
   }).join('');
 }
 
 function renderSWOT(d){
   const quads=[{key:'forces',cls:'f',title:'Forces'},{key:'faiblesses',cls:'w',title:'Faiblesses'},{key:'opportunites',cls:'o',title:'Opportunités'},{key:'menaces',cls:'t',title:'Menaces'}];
-  $('res-swot').innerHTML=quads.map(q=>`
-    <div class="sq ${q.cls}">
-      <div class="sq-title">${q.title}</div>
-      <ul>${(d[q.key]||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
-    </div>`).join('');
+  $('res-swot').innerHTML=quads.map(q=>`<div class="sq ${q.cls}"><div class="sq-title">${q.title}</div><ul>${(d[q.key]||[]).map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('');
 }
 
 function renderRadar(d){
@@ -582,15 +518,7 @@ function renderRadar(d){
   });
   svg+=`<circle cx="${cx}" cy="${cy}" r="3" fill="#e0dff8"/>`;
   $('res-radar-svg').innerHTML=svg;
-  $('res-rl').innerHTML=cr.map(c=>`
-    <div class="rl-row">
-      <div class="rl-top">
-        <span class="rl-name">${c.nom}</span>
-        <div class="dots">${Array.from({length:5},(_,i)=>`<div class="dot${i<c.score?' on':''}"></div>`).join('')}</div>
-        <span class="rl-num" style="color:${scoreColor(c.score)}">${c.score}/5</span>
-      </div>
-      <div class="rl-just">${c.justification}</div>
-    </div>`).join('');
+  $('res-rl').innerHTML=cr.map(c=>`<div class="rl-row"><div class="rl-top"><span class="rl-name">${c.nom}</span><div class="dots">${Array.from({length:5},(_,i)=>`<div class="dot${i<c.score?' on':''}"></div>`).join('')}</div><span class="rl-num" style="color:${scoreColor(c.score)}">${c.score}/5</span></div><div class="rl-just">${c.justification}</div></div>`).join('');
 }
 
 function renderRecos(d){
@@ -599,34 +527,16 @@ function renderRecos(d){
   const ico={strategie:'🎯',data:'📊',ia:'🤖',organisation:'👥',infrastructure:'🏗️'};
   $('res-recos').innerHTML=recos.map(r=>{
     const i=imp[r.impact]||{lbl:r.impact,cls:'bc'};
-    return `<div class="reco-item">
-      <div class="reco-num">${r.priorite}</div>
-      <div class="reco-body">
-        <div class="reco-title">${ico[r.categorie]||'💡'} ${r.titre}</div>
-        <div class="reco-desc">${r.description}</div>
-        <div class="reco-meta">
-          <span class="reco-badge ${i.cls}">${i.lbl}</span>
-          <span class="reco-badge bcat">${r.categorie}</span>
-        </div>
-      </div>
-    </div>`;
+    return `<div class="reco-item"><div class="reco-num">${r.priorite}</div><div class="reco-body"><div class="reco-title">${ico[r.categorie]||'💡'} ${r.titre}</div><div class="reco-desc">${r.description}</div><div class="reco-meta"><span class="reco-badge ${i.cls}">${i.lbl}</span><span class="reco-badge bcat">${r.categorie}</span></div></div></div>`;
   }).join('');
 }
 
 function renderSources(sources){
   if(!sources||sources.length===0){
-    $('res-sources').innerHTML=`<p style="color:var(--text-3);font-size:13px;padding:8px 0">Aucune source web collectée pour cette analyse.</p>`;
+    $('res-sources').innerHTML=`<p style="color:var(--text-3);font-size:13px;padding:8px 0">Aucune source web collectée.</p>`;
     return;
   }
-  $('res-sources').innerHTML=sources.map((s,i)=>`
-    <div class="source-item">
-      <div class="source-num">${i+1}</div>
-      <div class="source-content">
-        <div class="source-title">${s.titre||'Source'}</div>
-        <a class="source-url" href="${s.url}" target="_blank" rel="noopener">${s.url}</a>
-        ${s.description?`<div class="source-desc">${s.description}</div>`:''}
-      </div>
-    </div>`).join('');
+  $('res-sources').innerHTML=sources.map((s,i)=>`<div class="source-item"><div class="source-num">${i+1}</div><div class="source-content"><div class="source-title">${s.titre||'Source'}</div><a class="source-url" href="${s.url}" target="_blank" rel="noopener">${s.url}</a>${s.description?`<div class="source-desc">${s.description}</div>`:''}</div></div>`).join('');
 }
 
 async function startAnalysis(){
@@ -635,7 +545,6 @@ async function startAnalysis(){
   if(!company){errBox.textContent='Veuillez saisir le nom d\'une entreprise.';errBox.classList.remove('hidden');return;}
   if(!apiKey){errBox.textContent='Veuillez saisir votre clé API Anthropic.';errBox.classList.remove('hidden');return;}
   try{localStorage.setItem('aek',apiKey);}catch(_){}
-
   $('section-form').classList.add('hidden');
   $('section-loading').classList.remove('hidden');
   $('section-results').classList.add('hidden');
@@ -643,28 +552,28 @@ async function startAnalysis(){
   $('lbl-company').textContent=company;
   [1,2,3,4].forEach(i=>setAgent(i,'pending'));
 
-  // ── ÉTAPE 1 : Agent 0 recherche web ──
-  let researchReport = '';
-  let researchSources = [];
+  // ÉTAPE 1 — Recherche web
+  let fullReport = '';
+  let sources = [];
   try{
-    const research = await runResearchAgent(apiKey, model, company);
-    researchReport = research.report;
-    researchSources = extractSources(researchReport);
+    fullReport = await runResearchAgent(apiKey, model, company);
+    sources = extractSources(fullReport);
   }catch(e){
-    setAgent0('error', `Recherche échouée : ${e.message} — analyse depuis les connaissances`);
-    researchReport = '';
+    setAgent0('error', `Recherche échouée : ${e.message}`);
   }
 
-  // ── ÉTAPE 2 : 4 agents en parallèle avec le rapport de recherche ──
-  const p = prompts(company, researchReport);
-  try{
-    const [r1,r2,r3,r4] = await Promise.allSettled([
-      callAgent(apiKey, model, p.synthese.system, p.synthese.user, 1),
-      callAgent(apiKey, model, p.swot.system,     p.swot.user,     2),
-      callAgent(apiKey, model, p.radar.system,    p.radar.user,    3),
-      callAgent(apiKey, model, p.recos.system,    p.recos.user,    4)
-    ]);
+  // Extraire uniquement les passages les plus pertinents, limité à MAX_CTX_CHARS
+  const keyContext = extractKeyContext(fullReport, MAX_CTX_CHARS);
 
+  // ÉTAPE 2 — 4 agents en parallèle avec contexte limité
+  const p = prompts(company, keyContext);
+  try{
+    const [r1,r2,r3,r4]=await Promise.allSettled([
+      callAgent(apiKey,model,p.synthese.system,p.synthese.user,1),
+      callAgent(apiKey,model,p.swot.system,p.swot.user,2),
+      callAgent(apiKey,model,p.radar.system,p.radar.user,3),
+      callAgent(apiKey,model,p.recos.system,p.recos.user,4)
+    ]);
     $('section-loading').classList.add('hidden');
     $('section-results').classList.remove('hidden');
     $('res-company').textContent=company;
@@ -672,17 +581,14 @@ async function startAnalysis(){
 
     if(r1.status==='fulfilled'){renderSynthese(r1.value);}
     else{$('res-synthese').innerHTML=`<div class="synth-block"><div class="synth-block-body" style="color:var(--red)">⚠ ${r1.reason?.message}</div></div>`;}
-
-    if(r2.status==='fulfilled'){try{renderSWOT(parseJSON(r2.value));}catch(e){$('res-swot').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing SWOT</p>`;}}
+    if(r2.status==='fulfilled'){try{renderSWOT(parseJSON(r2.value));}catch(e){$('res-swot').innerHTML=`<p style="color:var(--red)">⚠ Erreur SWOT</p>`;}}
     else{$('res-swot').innerHTML=`<p style="color:var(--red)">⚠ ${r2.reason?.message}</p>`;}
-
-    if(r3.status==='fulfilled'){try{renderRadar(parseJSON(r3.value));}catch(e){$('res-radar-svg').parentElement.innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Radar</p>`;}}
+    if(r3.status==='fulfilled'){try{renderRadar(parseJSON(r3.value));}catch(e){$('res-radar-svg').parentElement.innerHTML=`<p style="color:var(--red)">⚠ Erreur Radar</p>`;}}
     else{$('res-rl').innerHTML=`<p style="color:var(--red)">⚠ ${r3.reason?.message}</p>`;}
-
-    if(r4.status==='fulfilled'){try{renderRecos(parseJSON(r4.value));}catch(e){$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur parsing Recos</p>`;}}
+    if(r4.status==='fulfilled'){try{renderRecos(parseJSON(r4.value));}catch(e){$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ Erreur Recos</p>`;}}
     else{$('res-recos').innerHTML=`<p style="color:var(--red)">⚠ ${r4.reason?.message}</p>`;}
 
-    renderSources(researchSources);
+    renderSources(sources);
 
   }catch(globalErr){
     $('section-loading').classList.add('hidden');
