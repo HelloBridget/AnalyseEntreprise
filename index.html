@@ -358,13 +358,22 @@ async function callAPI(apiKey, model, system, messages, maxTokens, tools){
 
 async function runResearchAgent(apiKey, model, company){
   setAgent0('running', `Recherche en cours sur <strong>${company}</strong>…`);
-  const system = `Tu es un agent de veille stratégique. Tu synthétises tes connaissances sur une entreprise en bullet points courts et factuels.`;
-  const userPrompt = `Synthèse rapide sur "${company}" : chiffres clés, vision du dirigeant, axes stratégiques 2025-2026, actualités récentes. Bullet points, max 15 mots par point. Inclus les données les plus récentes que tu connais.`;
+  const tools = [{ type:'web_search_20250305', name:'web_search' }];
+  const system = `Tu es un agent de veille stratégique. Fais UNE recherche web ciblée sur l'entreprise demandée, puis synthétise en bullet points courts.`;
+  const userPrompt = `Recherche les infos récentes sur "${company}" : chiffres clés, vision du dirigeant, stratégie 2025-2026, actualités. Synthétise en bullet points (max 15 mots par point).`;
 
-  const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 600);
-  const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
-  setAgent0('done', `✓ Recherche terminée — données collectées`);
-  return textBlocks;
+  try {
+    const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 600, tools);
+    const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    setAgent0('done', `✓ Recherche terminée`);
+    return textBlocks;
+  } catch(e) {
+    // Fallback sans web search si erreur de tokens
+    const data = await callAPI(apiKey, model, system, [{role:'user', content: userPrompt}], 500);
+    const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
+    setAgent0('done', `✓ Analyse depuis les connaissances`);
+    return textBlocks;
+  }
 }
 
 async function callAgent(apiKey, model, system, user, agentN){
