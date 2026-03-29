@@ -439,7 +439,8 @@ function prompts(company, keyContext){
 
 function extractSources(report){
   if(!report) return [];
-  const urls = [...new Set((report.match(/https?:\/\/[^\s\)\]\,"']+/g)||[])].slice(0,8);
+  const urlRegex = new RegExp('https?://[^\\s<>\\[\\](),"\'\\\\]+', 'g');
+  const urls = [...new Set((report.match(urlRegex)||[]))].slice(0,8);
   return urls.map((url,i) => {
     const urlIdx = report.indexOf(url);
     const before = report.substring(Math.max(0,urlIdx-120), urlIdx);
