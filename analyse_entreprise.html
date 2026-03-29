@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Système Expert — Analyse Entreprise IA</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:        #ffffff;
+      --card:      #f8f9fc;
+      --card2:     #f0f2f7;
+      --border:    #e2e6ed;
+      --purple:    #7c3aed;
+      --purpleL:   #6d28d9;
+      --blue:      #2563eb;
+      --green:     #059669;
+      --orange:    #d97706;
+      --red:       #dc2626;
+      --text:      #111827;
+      --muted:     #6b7280;
+      --r:         12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 28px 20px;
+    }
+
+    /* ── HEADER ── */
+    .app-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .logo-icon {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+    }
+    .logo h1 {
+      font-size: 1.9rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--purpleL), var(--blue));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .app-header p {
+      color: var(--muted); font-size: 0.92rem;
+    }
+    .agents-pill {
+      display: inline-flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;
+      justify-content: center;
+    }
+    .agents-pill span {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 100px; padding: 3px 12px;
+      font-size: 0.75rem; color: var(--muted);
+    }
+
+    /* ── FORM ── */
+    .form-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 28px;
+      max-width: 680px; margin: 0 auto;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block; font-size: 0.78rem; font-weight: 700;
+      color: var(--muted); text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); padding: 11px 14px; font-size: 0.95rem;
+      outline: none; transition: border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus { border-color: var(--purple); }
+    .form-group input::placeholder { color: #424a54; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media(max-width:600px){ .form-row{ grid-template-columns:1fr; } }
+
+    .btn-analyze {
+      width: 100%; padding: 13px; margin-top: 6px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: opacity .2s, transform .1s;
+    }
+    .btn-analyze:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-analyze:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+    .error-box {
+      background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.35);
+      border-radius: 8px; padding: 12px 16px;
+      color: var(--red); font-size: .88rem; margin-top: 12px;
+    }
+
+    /* ── LOADING ── */
+    #section-loading { max-width: 680px; margin: 0 auto; }
+    .loading-title {
+      text-align: center; margin-bottom: 20px;
+    }
+    .loading-title h2 {
+      font-size: 1.3rem; color: var(--purpleL);
+    }
+    .loading-title p { color: var(--muted); margin-top: 4px; }
+
+    .agents-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+    }
+    @media(max-width:600px){ .agents-grid{ grid-template-columns:repeat(2,1fr); } }
+
+    .agent-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; text-align: center;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .agent-card.running {
+      border-color: var(--purple);
+      box-shadow: 0 0 14px rgba(124,58,237,.3);
+    }
+    .agent-card.done   { border-color: var(--green); }
+    .agent-card.error  { border-color: var(--red); }
+
+    .agent-emoji { font-size: 1.7rem; margin-bottom: 6px; }
+    .agent-label { font-size: .78rem; font-weight: 600; color: var(--muted); }
+    .agent-badge {
+      display: inline-block; padding: 2px 10px; border-radius: 100px;
+      font-size: .7rem; font-weight: 700; margin-top: 8px;
+    }
+    .b-pending  { background: #2a2f38; color: var(--muted); }
+    .b-running  { background: rgba(124,58,237,.2); color: var(--purpleL); }
+    .b-done     { background: rgba(16,185,129,.2); color: var(--green); }
+    .b-error    { background: rgba(239,68,68,.2); color: var(--red); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      display: inline-block; width: 14px; height: 14px;
+      border: 2px solid rgba(124,58,237,.3); border-top-color: var(--purpleL);
+      border-radius: 50%; animation: spin .8s linear infinite;
+      vertical-align: middle; margin-right: 4px;
+    }
+
+    /* ── RESULTS ── */
+    .results-wrap { max-width: 1200px; margin: 0 auto; }
+    .results-head {
+      text-align: center; margin-bottom: 28px;
+    }
+    .results-head h2 {
+      font-size: 1.7rem; font-weight: 800;
+    }
+    .results-head .company { color: var(--purpleL); }
+    .results-head .ts { color: var(--muted); font-size: .82rem; margin-top: 4px; }
+
+    .results-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    @media(max-width:900px){ .results-grid{ grid-template-columns:1fr; } }
+    .full { grid-column: 1 / -1; }
+
+    .rcard {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden;
+    }
+    .rcard-head {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px; background: rgba(124,58,237,.08);
+      border-bottom: 1px solid var(--border);
+    }
+    .rcard-head .ico { font-size: 1.15rem; }
+    .rcard-head h3 {
+      font-size: .82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .07em;
+      color: var(--purpleL);
+    }
+    .rcard-body { padding: 18px; }
+
+    /* Synthèse */
+    .synthese-body {
+      font-size: .88rem; line-height: 1.75; color: var(--text);
+    }
+    .synthese-body strong { color: var(--purpleL); }
+
+    /* SWOT */
+    .swot-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .sq { border-radius: 8px; padding: 14px; }
+    .sq.f  { background: rgba(16,185,129,.07); border: 1px solid rgba(16,185,129,.25); }
+    .sq.w  { background: rgba(239,68,68,.07);  border: 1px solid rgba(239,68,68,.25); }
+    .sq.o  { background: rgba(59,130,246,.07); border: 1px solid rgba(59,130,246,.25); }
+    .sq.t  { background: rgba(245,158,11,.07); border: 1px solid rgba(245,158,11,.25); }
+    .sq-title {
+      font-size: .72rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .09em; margin-bottom: 10px;
+    }
+    .sq.f .sq-title { color: var(--green); }
+    .sq.w .sq-title { color: var(--red); }
+    .sq.o .sq-title { color: var(--blue); }
+    .sq.t .sq-title { color: var(--orange); }
+    .sq ul { list-style: none; }
+    .sq ul li {
+      font-size: .82rem; line-height: 1.5; padding: 3px 0;
+      display: flex; gap: 6px; color: var(--text);
+    }
+    .sq ul li::before { content: '▸'; opacity: .6; flex-shrink: 0; }
+
+    /* Radar */
+    .radar-wrap { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    #res-radar-svg { width: 100%; max-width: 300px; }
+
+    .score-box {
+      text-align: center; width: 100%;
+      background: rgba(124,58,237,.1); border-radius: 8px; padding: 14px;
+    }
+    .score-lbl { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+    .score-val { font-size: 2.4rem; font-weight: 900; color: var(--purpleL); }
+    .score-max { font-size: .95rem; color: var(--muted); }
+    .bar { height: 8px; background: var(--border); border-radius: 100px; margin-top: 8px; overflow: hidden; }
+    .bar-fill {
+      height: 100%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--purple), var(--blue));
+      transition: width 1s ease;
+    }
+
+    .radar-legend { width: 100%; }
+    .rl-row {
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .rl-row:last-child { border-bottom: none; }
+    .rl-top {
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .rl-name { font-size: .82rem; color: var(--text); flex: 1; }
+    .dots { display: flex; gap: 3px; margin-right: 6px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+    .dot.on { background: var(--purpleL); }
+    .rl-num { font-weight: 700; font-size: .82rem; min-width: 26px; text-align: right; }
+    .rl-just { font-size: .74rem; color: var(--muted); margin-top: 2px; }
+
+    /* Recommandations */
+    .reco-list { display: flex; flex-direction: column; gap: 10px; }
+    .reco-item {
+      background: var(--bg); border: 1px solid var(--border);
+      border-left: 3px solid var(--purple);
+      border-radius: 6px; padding: 13px;
+    }
+    .reco-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 8px; margin-bottom: 5px;
+    }
+    .reco-title { font-weight: 700; font-size: .9rem; flex: 1; }
+    .reco-tags { display: flex; gap: 6px; flex-shrink: 0; }
+    .tag {
+      padding: 2px 9px; border-radius: 100px;
+      font-size: .68rem; font-weight: 700;
+    }
+    .tag-p  { background: rgba(124,58,237,.2); color: var(--purpleL); }
+    .tag-c  { background: rgba(16,185,129,.2); color: var(--green); }
+    .tag-m  { background: rgba(245,158,11,.2); color: var(--orange); }
+    .tag-l  { background: rgba(59,130,246,.2); color: var(--blue); }
+    .reco-desc { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+    /* Actions footer */
+    .actions {
+      display: flex; gap: 12px; justify-content: center; margin-top: 28px;
+    }
+    .btn-sec {
+      padding: 11px 28px; background: var(--card);
+      border: 1px solid var(--border); color: var(--text);
+      border-radius: 8px; font-size: .88rem; cursor: pointer;
+      transition: border-color .2s;
+    }
+    .btn-sec:hover { border-color: var(--purple); }
+
+    /* Utilities */
+    .hidden { display: none !important; }
+
+    /* Proxy toggle */
+    .proxy-row {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .proxy-toggle {
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer; font-size: .85rem; color: var(--muted);
+      user-select: none;
+    }
+    .proxy-toggle input { display: none; }
+    .toggle-track {
+      width: 36px; height: 20px; background: var(--border);
+      border-radius: 100px; position: relative; transition: background .2s;
+      flex-shrink: 0;
+    }
+    .toggle-thumb {
+      position: absolute; top: 3px; left: 3px;
+      width: 14px; height: 14px; background: #fff;
+      border-radius: 50%; transition: transform .2s;
+    }
+    .proxy-toggle input:checked + .toggle-track { background: var(--purple); }
+    .proxy-toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(16px); }
+    .proxy-hint { font-size: .78rem; color: var(--muted); }
+    .proxy-hint code {
+      background: var(--card2); padding: 2px 6px;
+      border-radius: 4px; font-family: monospace; color: var(--purpleL);
+    }
+    .proxy-hint.ok { color: var(--green); }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #000; padding: 0; }
+      .actions, #section-form, #section-loading, .btn-analyze { display: none !important; }
+      .rcard { break-inside: avoid; }
+      .logo h1 { -webkit-text-fill-color: #4c1d95; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 1 — FORMULAIRE
+══════════════════════════════════════════════════ -->
+<div id="section-form">
+  <div class="app-header">
+    <div class="logo">
+      <div class="logo-icon">🔬</div>
+      <h1>Système Expert Entreprise</h1>
+    </div>
+    <p>Analyse multi-agents propulsée par Claude AI</p>
+    <div class="agents-pill">
+      <span>📋 Agent Synthèse</span>
+      <span>⚖️ Agent SWOT</span>
+      <span>📡 Agent Radar DATA/IA</span>
+      <span>💡 Agent Recommandations</span>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-group">
+      <label>Entreprise à analyser</label>
+      <input id="inp-company" type="text"
+        placeholder="Ex : Airbus, LVMH, BNP Paribas, Michelin, Capgemini…" autocomplete="off" />
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Clé API Anthropic</label>
+        <input id="inp-apikey" type="password" placeholder="sk-ant-api03-…" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label>Modèle</label>
+        <select id="inp-model">
+          <option value="claude-opus-4-6">Claude Opus 4.6 ✦ Meilleur</option>
+          <option value="claude-sonnet-4-6">Claude Sonnet 4.6 ⚡ Rapide</option>
+        </select>
+      </div>
+    </div>
+    <div class="proxy-row">
+      <label class="proxy-toggle">
+        <input type="checkbox" id="chk-proxy" onchange="toggleProxy(this)">
+        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+        Utiliser le proxy local (résout l'erreur CORS)
+      </label>
+      <span id="proxy-status" class="proxy-hint">→ Lancez d'abord <code>demarrer_proxy.ps1</code></span>
+    </div>
+    <button class="btn-analyze" id="btn-go" onclick="startAnalysis()">
+      🚀 Lancer l'analyse
+    </button>
+    <div id="err-box" class="error-box hidden"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 2 — CHARGEMENT
+══════════════════════════════════════════════════ -->
+<div id="section-loading" class="hidden">
+  <div class="loading-title">
+    <h2>Analyse en cours…</h2>
+    <p>4 agents travaillent en parallèle sur <strong id="lbl-company"></strong></p>
+  </div>
+  <div class="agents-grid">
+    <div class="agent-card" id="ac-1">
+      <div class="agent-emoji">📋</div>
+      <div class="agent-label">Synthèse</div>
+      <div><span class="agent-badge b-pending" id="ab-1">En attente</span></div>
+    </div>
+    <div class="agent-card" id="ac-2">
+      <div class="agent-emoji">⚖️</div>
+      <div class="agent-label">SWOT</div>
+      <div><span class="agent-badge b-pending" id="ab-2">En attente</span></div>
+    </div>
+    <div class="agent-card" id="ac-3">
+      <div class="agent-emoji">📡</div>
+      <div class="agent-label">Radar DATA/IA</div>
+      <div><span class="agent-badge b-pending" id="ab-3">En attente</span></div>
+    </div>
+    <div class="agent-card" id="ac-4">
+      <div class="agent-emoji">💡</div>
+      <div class="agent-label">Recommandations</div>
+      <div><span class="agent-badge b-pending" id="ab-4">En attente</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 3 — RÉSULTATS
+══════════════════════════════════════════════════ -->
+<div id="section-results" class="hidden">
+  <div class="results-wrap">
+
+    <div class="results-head">
+      <h2>Rapport d'Analyse — <span class="company" id="res-company"></span></h2>
+      <p class="ts" id="res-ts"></p>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- Agent 1 : Synthèse -->
+      <div class="rcard full">
+        <div class="rcard-head">
+          <span class="ico">📋</span>
+          <h3>Agent 1 — Synthèse &amp; Actualité</h3>
+        </div>
+        <div class="rcard-body">
+          <div class="synthese-body" id="res-synthese"></div>
+        </div>
+      </div>
+
+      <!-- Agent 2 : SWOT -->
+      <div class="rcard">
+        <div class="rcard-head">
+          <span class="ico">⚖️</span>
+          <h3>Agent 2 — Analyse SWOT</h3>
+        </div>
+        <div class="rcard-body">
+          <div class="swot-grid" id="res-swot"></div>
+        </div>
+      </div>
+
+      <!-- Agent 3 : Radar DATA/IA -->
+      <div class="rcard">
+        <div class="rcard-head">
+          <span class="ico">📡</span>
+          <h3>Agent 3 — Radar Maturité DATA/IA</h3>
+        </div>
+        <div class="rcard-body">
+          <div class="radar-wrap">
+            <svg id="res-radar-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="score-box">
+              <div class="score-lbl">Score global de maturité</div>
+              <div><span class="score-val" id="res-score">—</span><span class="score-max"> / 5</span></div>
+              <div class="bar"><div class="bar-fill" id="res-bar" style="width:0%"></div></div>
+            </div>
+            <div class="radar-legend" id="res-rl"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent 4 : Recommandations -->
+      <div class="rcard full">
+        <div class="rcard-head">
+          <span class="ico">💡</span>
+          <h3>Agent 4 — Recommandations Stratégiques</h3>
+        </div>
+        <div class="rcard-body">
+          <div class="reco-list" id="res-recos"></div>
+        </div>
+      </div>
+
+    </div><!-- /results-grid -->
+
+    <div class="actions">
+      <button class="btn-sec" onclick="window.print()">🖨️ Imprimer / PDF</button>
+      <button class="btn-sec" onclick="newAnalysis()">🔄 Nouvelle analyse</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+// ── PROXY ────────────────────────────────────────────────────────────
+const DIRECT_URL = 'https://api.anthropic.com/v1/messages';
+const PROXY_URL  = 'http://localhost:3456/';
+let useProxy = false;
+
+function toggleProxy(chk){
+  useProxy = chk.checked;
+  const hint = $('proxy-status');
+  if(useProxy){
+    // Test if proxy is reachable
+    fetch(PROXY_URL, {method:'OPTIONS'})
+      .then(()=>{ hint.className='proxy-hint ok'; hint.textContent='✓ Proxy connecté'; })
+      .catch(()=>{ hint.className='proxy-hint'; hint.innerHTML='⚠ Proxy non détecté — lancez <code>demarrer_proxy.ps1</code>'; });
+  } else {
+    hint.className='proxy-hint';
+    hint.innerHTML='→ Lancez d\'abord <code>demarrer_proxy.ps1</code>';
+  }
+}
+
+function apiUrl(){ return useProxy ? PROXY_URL : DIRECT_URL; }
+
+// ── HELPERS ──────────────────────────────────────────────────────────
+function $(id){ return document.getElementById(id); }
+
+function setAgent(n, state){
+  const card  = $(`ac-${n}`);
+  const badge = $(`ab-${n}`);
+  if(!card || !badge) return;
+  card.className = 'agent-card' + (state !== 'pending' ? ' ' + state : '');
+  const cfg = {
+    pending : {cls:'b-pending', lbl:'En attente'},
+    running : {cls:'b-running', lbl:'<span class="spinner"></span>En cours…'},
+    done    : {cls:'b-done',    lbl:'✓ Terminé'},
+    error   : {cls:'b-error',   lbl:'✗ Erreur'}
+  }[state] || {cls:'b-pending', lbl:'En attente'};
+  badge.className = `agent-badge ${cfg.cls}`;
+  badge.innerHTML = cfg.lbl;
+}
+
+function parseJSON(txt){
+  const m = txt.match(/\{[\s\S]*\}/);
+  return JSON.parse(m ? m[0] : txt.trim());
+}
+
+function scoreColor(s){
+  if(s >= 4) return '#10b981';
+  if(s >= 3) return '#3b82f6';
+  if(s >= 2) return '#f59e0b';
+  return '#ef4444';
+}
+
+// ── API CALL ─────────────────────────────────────────────────────────
+async function callAgent(apiKey, model, system, user, agentN){
+  setAgent(agentN, 'running');
+  try {
+    let messages = [{role:'user', content: user}];
+    let maxCont = 6;
+
+    while(maxCont-- > 0){
+      const res = await fetch(apiUrl(), {
+        method: 'POST',
+        headers: {
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({
+          model, system, messages,
+          max_tokens: agentN === 1 ? 1800 : 1200
+        })
+      });
+
+      if(!res.ok){
+        let errMsg = `HTTP ${res.status}`;
+        try { const e = await res.json(); errMsg = e.error?.message || errMsg; } catch(_){}
+        if(res.status === 0 || res.type === 'opaque'){
+          throw new Error('Erreur CORS : accédez via un serveur local ou un proxy. Voir README.');
+        }
+        throw new Error(errMsg);
+      }
+
+      const data = await res.json();
+      const textBlocks = (data.content||[]).filter(b => b.type === 'text').map(b => b.text).join('\n');
+
+      if(data.stop_reason === 'end_turn'){
+        setAgent(agentN, 'done');
+        return textBlocks;
+      }
+      if(data.stop_reason === 'pause_turn'){
+        // server-side tool needs continuation
+        messages = [
+          {role:'user', content: user},
+          {role:'assistant', content: data.content}
+        ];
+        continue;
+      }
+      // Unexpected but we have text — return it
+      if(textBlocks){
+        setAgent(agentN, 'done');
+        return textBlocks;
+      }
+      throw new Error(`Stop reason inattendu : ${data.stop_reason}`);
+    }
+    throw new Error('Trop de continuations');
+  } catch(err){
+    setAgent(agentN, 'error');
+    throw err;
+  }
+}
+
+// ── PROMPTS ──────────────────────────────────────────────────────────
+function prompts(company){
+  return {
+    synthese: {
+      system: `Tu es un analyste stratégique senior. Tu rédiges des synthèses précises, factuelles et structurées en français.`,
+      user:
+`Effectue une synthèse complète de l'entreprise "${company}".
+
+Structure ta réponse avec ces sections (utilise **Titre** pour les titres) :
+**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité principale, date de création, siège social
+**2. CHIFFRES CLÉS** — Chiffre d'affaires, effectifs, présence géographique
+**3. MODÈLE ÉCONOMIQUE** — Sources de revenus, avantages compétitifs
+**4. POSITIONNEMENT CONCURRENTIEL** — Position sur le marché, principaux concurrents
+**5. ACTUALITÉ 2023-2025** — Événements stratégiques récents (acquisitions, IA, innovations)
+
+Sois factuel et concis. 400-500 mots maximum.`
+    },
+
+    swot: {
+      system: `Tu es un consultant expert en stratégie d'entreprise. Tu RÉPONDS UNIQUEMENT en JSON valide, sans texte supplémentaire.`,
+      user:
+`Réalise une analyse SWOT de l'entreprise "${company}".
+Réponds UNIQUEMENT avec ce JSON (aucun texte avant ou après) :
+{
+  "forces":      ["Force 1 max 15 mots","Force 2","Force 3","Force 4"],
+  "faiblesses":  ["Faiblesse 1 max 15 mots","Faiblesse 2","Faiblesse 3","Faiblesse 4"],
+  "opportunites":["Opportunité 1 max 15 mots","Opportunité 2","Opportunité 3","Opportunité 4"],
+  "menaces":     ["Menace 1 max 15 mots","Menace 2","Menace 3","Menace 4"]
+}
+Exactement 4 éléments par liste. Sois précis et spécifique.`
+    },
+
+    radar: {
+      system: `Tu es un expert en transformation digitale et IA. Tu évalues la maturité DATA/IA des entreprises. Tu RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:
+`Évalue la maturité DATA/IA de "${company}" sur les 7 critères suivants.
+Réponds UNIQUEMENT avec ce JSON (aucun texte avant ou après) :
+{
+  "criteres": [
+    {"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"max 15 mots"},
+    {"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"max 15 mots"},
+    {"id":3,"nom":"Ressources et Compétences","score":X,"justification":"max 15 mots"},
+    {"id":4,"nom":"Infrastructure digitale","score":X,"justification":"max 15 mots"},
+    {"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"max 15 mots"},
+    {"id":6,"nom":"Infrastructure technologique","score":X,"justification":"max 15 mots"},
+    {"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"max 15 mots"}
+  ]
+}
+X est un entier de 1 (très faible) à 5 (excellent). Justification = une phrase courte.`
+    },
+
+    recos: {
+      system: `Tu es un consultant senior en stratégie digitale et IA. Tu RÉPONDS UNIQUEMENT en JSON valide.`,
+      user:
+`Formule 5 recommandations stratégiques prioritaires pour accélérer la transformation DATA/IA de "${company}".
+Réponds UNIQUEMENT avec ce JSON (aucun texte avant ou après) :
+{
+  "recommandations": [
+    {
+      "priorite":1,
+      "titre":"Titre court max 8 mots",
+      "description":"Action concrète et spécifique max 25 mots",
+      "impact":"court",
+      "categorie":"strategie"
+    }
+  ]
+}
+"impact" = "court" (0-6 mois) | "moyen" (6-18 mois) | "long" (18+ mois).
+"categorie" = strategie | data | ia | organisation | infrastructure.
+5 recommandations exactement.`
+    }
+  };
+}
+
+// ── RENDERERS ────────────────────────────────────────────────────────
+function renderSynthese(txt){
+  const html = txt
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+  $('res-synthese').innerHTML = html;
+}
+
+function renderSWOT(d){
+  const quads = [
+    {key:'forces',       cls:'f', title:'✅ FORCES'},
+    {key:'faiblesses',   cls:'w', title:'⚠️ FAIBLESSES'},
+    {key:'opportunites', cls:'o', title:'🚀 OPPORTUNITÉS'},
+    {key:'menaces',      cls:'t', title:'🔴 MENACES'}
+  ];
+  $('res-swot').innerHTML = quads.map(q => `
+    <div class="sq ${q.cls}">
+      <div class="sq-title">${q.title}</div>
+      <ul>${(d[q.key]||[]).map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function renderRadar(d){
+  const cr = d.criteres || [];
+  const n  = cr.length; // 7
+  const cx = 150, cy = 150, r = 100;
+
+  const avg = cr.reduce((s,c)=>s+c.score,0) / n;
+  $('res-score').textContent = avg.toFixed(1);
+  $('res-bar').style.width   = `${(avg/5)*100}%`;
+
+  // Short labels for 7 axes (to avoid overflow)
+  const shortLbls = ['Vision','IA','Compétences','Infra digitale','Données','Tech','Conformité'];
+
+  let svg = '';
+
+  // Background rings (1..5)
+  for(let lv=1; lv<=5; lv++){
+    const pts = cr.map((_,i)=>{
+      const a = (i*2*Math.PI/n) - Math.PI/2;
+      return `${cx+(lv/5)*r*Math.cos(a)},${cy+(lv/5)*r*Math.sin(a)}`;
+    }).join(' ');
+    svg += `<polygon points="${pts}" fill="none" stroke="#30363d" stroke-width="${lv===5?1.2:.7}"/>`;
+  }
+
+  // Axes + labels
+  cr.forEach((_,i)=>{
+    const a   = (i*2*Math.PI/n) - Math.PI/2;
+    const x2  = cx+r*Math.cos(a), y2 = cy+r*Math.sin(a);
+    svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="#30363d" stroke-width=".7"/>`;
+    // Label placement
+    const lr  = r+18;
+    const lx  = cx+lr*Math.cos(a), ly = cy+lr*Math.sin(a);
+    const anch= Math.cos(a)>0.3?'start':Math.cos(a)<-0.3?'end':'middle';
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anch}" dominant-baseline="middle"
+      fill="#7d8590" font-size="7.5" font-family="system-ui,sans-serif">${shortLbls[i]||''}</text>`;
+  });
+
+  // Data polygon
+  const pts = cr.map((c,i)=>{
+    const a = (i*2*Math.PI/n) - Math.PI/2;
+    return `${cx+(c.score/5)*r*Math.cos(a)},${cy+(c.score/5)*r*Math.sin(a)}`;
+  }).join(' ');
+  svg += `<polygon points="${pts}" fill="rgba(124,58,237,.18)" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round"/>`;
+
+  // Dots
+  cr.forEach((c,i)=>{
+    const a  = (i*2*Math.PI/n) - Math.PI/2;
+    const dx = cx+(c.score/5)*r*Math.cos(a);
+    const dy = cy+(c.score/5)*r*Math.sin(a);
+    svg += `<circle cx="${dx}" cy="${dy}" r="4.5" fill="${scoreColor(c.score)}" stroke="#0d1117" stroke-width="1.5"/>`;
+  });
+
+  // Center
+  svg += `<circle cx="${cx}" cy="${cy}" r="3" fill="#30363d"/>`;
+
+  $('res-radar-svg').innerHTML = svg;
+
+  // Legend
+  $('res-rl').innerHTML = cr.map(c=>`
+    <div class="rl-row">
+      <div class="rl-top">
+        <span class="rl-name">${c.nom}</span>
+        <div class="dots">${Array.from({length:5},(_,i)=>`<div class="dot${i<c.score?' on':''}"></div>`).join('')}</div>
+        <span class="rl-num" style="color:${scoreColor(c.score)}">${c.score}/5</span>
+      </div>
+      <div class="rl-just">${c.justification}</div>
+    </div>`).join('');
+}
+
+function renderRecos(d){
+  const recos = d.recommandations || [];
+  const impMap = {
+    court: {lbl:'⚡ Court terme', cls:'tag-c'},
+    moyen: {lbl:'⏳ Moyen terme', cls:'tag-m'},
+    long:  {lbl:'🔭 Long terme',  cls:'tag-l'}
+  };
+  const catIco = {
+    strategie:'🎯', data:'📊', ia:'🤖', organisation:'👥', infrastructure:'🏗️'
+  };
+  $('res-recos').innerHTML = recos.map(r=>{
+    const imp = impMap[r.impact] || {lbl:r.impact, cls:'tag-c'};
+    const ico = catIco[r.categorie] || '💡';
+    return `
+      <div class="reco-item">
+        <div class="reco-top">
+          <span class="reco-title">${ico} ${r.titre}</span>
+          <div class="reco-tags">
+            <span class="tag tag-p">#${r.priorite}</span>
+            <span class="tag ${imp.cls}">${imp.lbl}</span>
+          </div>
+        </div>
+        <p class="reco-desc">${r.description}</p>
+      </div>`;
+  }).join('');
+}
+
+// ── MAIN ─────────────────────────────────────────────────────────────
+async function startAnalysis(){
+  const company = $('inp-company').value.trim();
+  const apiKey  = $('inp-apikey').value.trim();
+  const model   = $('inp-model').value;
+  const errBox  = $('err-box');
+
+  errBox.classList.add('hidden');
+  errBox.textContent = '';
+
+  if(!company){
+    errBox.textContent = 'Veuillez saisir le nom d\'une entreprise.';
+    errBox.classList.remove('hidden');
+    return;
+  }
+  if(!apiKey){
+    errBox.textContent = 'Veuillez saisir votre clé API Anthropic (sk-ant-…).';
+    errBox.classList.remove('hidden');
+    return;
+  }
+
+  // Persist key
+  try{ localStorage.setItem('aek', apiKey); }catch(_){}
+
+  // Switch views
+  $('section-form').classList.add('hidden');
+  $('section-loading').classList.remove('hidden');
+  $('section-results').classList.add('hidden');
+  $('lbl-company').textContent = company;
+  [1,2,3,4].forEach(i=>setAgent(i,'pending'));
+
+  const p = prompts(company);
+
+  try {
+    // 4 agents in parallel
+    const [r1, r2, r3, r4] = await Promise.allSettled([
+      callAgent(apiKey, model, p.synthese.system, p.synthese.user, 1),
+      callAgent(apiKey, model, p.swot.system,     p.swot.user,     2),
+      callAgent(apiKey, model, p.radar.system,    p.radar.user,    3),
+      callAgent(apiKey, model, p.recos.system,    p.recos.user,    4)
+    ]);
+
+    // Show results
+    $('section-loading').classList.add('hidden');
+    $('section-results').classList.remove('hidden');
+    $('res-company').textContent = company;
+    $('res-ts').textContent = `Généré le ${new Date().toLocaleDateString('fr-FR',{
+      day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'
+    })} · Modèle : ${model}`;
+
+    // Agent 1 — Synthèse
+    if(r1.status === 'fulfilled'){
+      renderSynthese(r1.value);
+    } else {
+      $('res-synthese').textContent = `⚠ Erreur : ${r1.reason?.message}`;
+    }
+
+    // Agent 2 — SWOT
+    if(r2.status === 'fulfilled'){
+      try { renderSWOT(parseJSON(r2.value)); }
+      catch(e){
+        $('res-swot').innerHTML = `<p style="color:var(--red)">⚠ Erreur de parsing : ${escHtml(r2.value.substring(0,200))}</p>`;
+      }
+    } else {
+      $('res-swot').innerHTML = `<p style="color:var(--red)">⚠ ${r2.reason?.message}</p>`;
+    }
+
+    // Agent 3 — Radar
+    if(r3.status === 'fulfilled'){
+      try { renderRadar(parseJSON(r3.value)); }
+      catch(e){
+        $('res-radar-svg').parentElement.innerHTML = `<p style="color:var(--red)">⚠ Erreur de parsing : ${escHtml(r3.value.substring(0,200))}</p>`;
+      }
+    } else {
+      $('res-rl').innerHTML = `<p style="color:var(--red)">⚠ ${r3.reason?.message}</p>`;
+    }
+
+    // Agent 4 — Recommandations
+    if(r4.status === 'fulfilled'){
+      try { renderRecos(parseJSON(r4.value)); }
+      catch(e){
+        $('res-recos').innerHTML = `<p style="color:var(--red)">⚠ Erreur de parsing : ${escHtml(r4.value.substring(0,200))}</p>`;
+      }
+    } else {
+      $('res-recos').innerHTML = `<p style="color:var(--red)">⚠ ${r4.reason?.message}</p>`;
+    }
+
+  } catch(globalErr){
+    $('section-loading').classList.add('hidden');
+    $('section-form').classList.remove('hidden');
+    errBox.textContent = `Erreur : ${globalErr.message}`;
+    errBox.classList.remove('hidden');
+  }
+}
+
+function newAnalysis(){
+  $('section-results').classList.add('hidden');
+  $('section-form').classList.remove('hidden');
+}
+
+function escHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Init
+window.addEventListener('load', ()=>{
+  try { const k=localStorage.getItem('aek'); if(k) $('inp-apikey').value=k; }catch(_){}
+  $('inp-company').addEventListener('keydown', e=>{ if(e.key==='Enter') startAnalysis(); });
+});
+</script>
+</body>
+</html>
