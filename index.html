@@ -278,7 +278,7 @@
 <script>
 const API_URL = 'https://api.anthropic.com/v1/messages';
 // Limite stricte du contexte injecté dans chaque agent (en caractères)
-const MAX_CTX_CHARS = 2000;
+const MAX_CTX_CHARS = 400;
 
 function $(id){ return document.getElementById(id); }
 
@@ -397,9 +397,9 @@ async function runResearchAgent(apiKey, model, company){
 async function callAgent(apiKey, model, system, user, agentN){
   setAgent(agentN,'running');
   try{
-    let messages=[{role:'user',content:user}], maxCont=4;
+    let messages=[{role:'user',content:user}], maxCont=2;
     while(maxCont-->0){
-      const data = await callAPI(apiKey, model, system, messages, 1200);
+      const data = await callAPI(apiKey, model, system, messages, 700);
       const txt=(data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n');
       if(data.stop_reason==='end_turn'){setAgent(agentN,'done');return txt;}
       if(data.stop_reason==='pause_turn'){messages=[{role:'user',content:messages[0].content},{role:'assistant',content:data.content}];continue;}
@@ -419,20 +419,20 @@ function prompts(company, keyContext){
   const ctx = buildContext(keyContext);
   return {
     synthese:{
-      system:`Tu es un analyste stratégique senior. Synthèses précises et factuelles en français.`,
-      user:`Synthèse de "${company}".${ctx}\n\nSections (utilise **TITRE** en gras) :\n**1. PRÉSENTATION GÉNÉRALE** — Secteur, activité, date, siège\n**2. CHIFFRES CLÉS** — Format : "Libellé : CHIFFRE unité (contexte)". 4 chiffres.\n**3. MODÈLE ÉCONOMIQUE** — Revenus, avantages\n**4. POSITIONNEMENT CONCURRENTIEL** — Marché, concurrents\n**5. VISION STRATÉGIQUE & OÙ VA L'ENTREPRISE** — Plans annoncés, déclarations du dirigeant, objectifs 2025-2030. Section prioritaire : cite les prises de parole réelles si disponibles.\n**6. ACTUALITÉ 2024-2025** — Faits marquants récents\n\n450 mots max.`
+      system:`Analyste stratégique senior. Réponds en français.`,
+      user:`Analyse "${company}".${ctx}\n**1.PRÉSENTATION** **2.CHIFFRES CLÉS**(4 métriques) **3.MODÈLE ÉCON.** **4.CONCURRENTS** **5.VISION 2025-2030**(objectifs, déclarations dirigeant) **6.ACTUALITÉ 2024-25**. Max 300 mots.`
     },
     swot:{
-      system:`Consultant stratégie. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`SWOT de "${company}".${ctx}\nJSON uniquement :\n{"forces":["i1","i2","i3","i4","i5","i6"],"faiblesses":["i1","i2","i3","i4","i5","i6"],"opportunites":["i1","i2","i3","i4","i5","i6"],"menaces":["i1","i2","i3","i4","i5","i6"]}\n6 éléments précis par liste, max 20 mots chacun.`
+      system:`Stratège. JSON valide uniquement.`,
+      user:`SWOT "${company}".${ctx}\n{"forces":["x6"],"faiblesses":["x6"],"opportunites":["x6"],"menaces":["x6"]} — 6 items/liste, 12 mots max.`
     },
     radar:{
       system:`Expert transformation digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
       user:`Maturité DATA/IA de "${company}".${ctx}\nJSON uniquement :\n{"criteres":[{"id":1,"nom":"Enjeux, vision et stratégie","score":X,"justification":"15 mots"},{"id":2,"nom":"État du déploiement de l'IA","score":X,"justification":"15 mots"},{"id":3,"nom":"Ressources et Compétences","score":X,"justification":"15 mots"},{"id":4,"nom":"Infrastructure digitale","score":X,"justification":"15 mots"},{"id":5,"nom":"Qualité du patrimoine de données","score":X,"justification":"15 mots"},{"id":6,"nom":"Infrastructure technologique","score":X,"justification":"15 mots"},{"id":7,"nom":"Maturité juridique, conformité et éthique","score":X,"justification":"15 mots"}]}\nX=entier 1-5.`
     },
     recos:{
-      system:`Consultant senior stratégie digitale et IA. RÉPONDS UNIQUEMENT en JSON valide.`,
-      user:`3 recommandations pour "${company}".${ctx}\nJSON uniquement :\n{"recommandations":[{"priorite":1,"titre":"max 8 mots","description":"40-50 mots, actionnable, tient compte de la vision du dirigeant","impact":"court","categorie":"strategie"}]}\nimpact=court|moyen|long. categorie=strategie|data|ia|organisation|infrastructure. EXACTEMENT 3.`
+      system:`Consultant IA. JSON valide uniquement.`,
+      user:`3 recommandations "${company}".${ctx}\n{"recommandations":[{"priorite":1,"titre":"8 mots","description":"35 mots","impact":"court|moyen|long","categorie":"strategie|data|ia|organisation|infrastructure"}]} EXACTEMENT 3.`
     }
   };
 }
